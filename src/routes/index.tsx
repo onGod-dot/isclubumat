@@ -65,14 +65,15 @@ function Index() {
         {/* HEADLINE */}
         <div className="relative mt-10 sm:mt-14 pb-8">
           <h1
-            className="relative z-10 font-[Archivo_Black] text-white text-center leading-[0.85] tracking-tight uppercase"
-            style={{ fontSize: "clamp(3.5rem, 14vw, 13rem)" }}
+            className="relative z-10 font-[Archivo_Black] text-white text-center leading-[0.85] tracking-tight uppercase break-words"
+            style={{ fontSize: "clamp(2.25rem, 10vw, 8.5rem)" }}
           >
             <span className="block">
               <span style={{ color: "var(--club-lime)" }}>#</span>CONNECTING
             </span>
             <span className="block">MINDS</span>
-            <span className="block">TECH PEOPLE</span>
+            <span className="block">ADVANCING</span>
+            <span className="block">TECHNOLOGY</span>
           </h1>
 
           {/* Floating glass card — left */}
