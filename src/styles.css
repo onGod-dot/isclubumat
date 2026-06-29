@@ -146,3 +146,28 @@
     color: var(--color-foreground);
   }
 }
+
+/* Handwriting draw animation for arrows */
+@keyframes draw-arrow {
+  0% { stroke-dashoffset: var(--dash, 400); }
+  70% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 0; }
+}
+@keyframes splash-pop {
+  0%, 60% { opacity: 0; transform: scale(0.6); }
+  80% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.arrow-draw path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: draw-arrow 2.2s ease-out forwards infinite;
+}
+.arrow-draw path.arrow-head {
+  animation-delay: 1.4s;
+}
+.arrow-splash {
+  opacity: 0;
+  transform-origin: center;
+  animation: splash-pop 2.2s ease-out forwards infinite;
+}
