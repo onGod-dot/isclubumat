@@ -76,9 +76,9 @@ function Index() {
             <span className="block">TECHNOLOGY</span>
           </h1>
 
-          {/* Floating glass card — hovering under the # (isclub.umat) */}
-          <div className="absolute z-20 left-[2%] sm:left-[6%] top-[-10px] sm:top-[-20px] hidden sm:block rotate-[-6deg] rounded-3xl border border-white/30 bg-white/15 p-3 backdrop-blur-md shadow-2xl animate-[float_5s_ease-in-out_infinite]">
-            <img src={logoAsset.url} alt="" className="h-24 w-24 rounded-2xl object-cover" />
+          {/* Floating glass card — left */}
+          <div className="absolute z-20 left-[14%] top-[44%] hidden sm:block rotate-[-6deg] rounded-3xl border border-white/30 bg-white/15 p-3 backdrop-blur-md shadow-2xl">
+            <img src={logoAsset.url} alt="" className="h-28 w-28 rounded-2xl object-cover" />
             <div className="mt-2 text-center text-white">
               <div className="text-sm font-bold">isclub.umat</div>
               <div className="text-[11px] opacity-80">23 422 members</div>
@@ -86,7 +86,7 @@ function Index() {
           </div>
 
           {/* Floating glass card — right */}
-          <div className="absolute z-20 right-[6%] top-[8%] hidden sm:block rotate-[7deg] rounded-3xl border border-white/30 bg-white/15 p-3 backdrop-blur-md shadow-2xl animate-[float_6s_ease-in-out_infinite]">
+          <div className="absolute z-20 right-[18%] top-[18%] hidden sm:block rotate-[7deg] rounded-3xl border border-white/30 bg-white/15 p-3 backdrop-blur-md shadow-2xl">
             <img src={logoAsset.url} alt="" className="h-28 w-28 rounded-2xl object-cover" />
             <div className="mt-2 text-center text-white">
               <div className="text-sm font-bold">tech.umat</div>
@@ -94,57 +94,33 @@ function Index() {
             </div>
           </div>
 
-          {/* Spinning sticker — small, tucked under the Y in TECHNOLOGY */}
+          {/* Spinning sticker */}
           <div
-            className="absolute right-[8%] sm:right-[14%] -bottom-6 sm:-bottom-8 z-20 flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full text-[color:var(--club-blue-deep)] shadow-xl"
+            className="absolute right-2 sm:right-6 bottom-2 sm:bottom-6 z-20 flex h-32 w-32 sm:h-40 sm:w-40 items-center justify-center rounded-full text-[color:var(--club-blue-deep)] shadow-xl"
             style={{ backgroundColor: "var(--club-lime)" }}
           >
             <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full animate-[spin_18s_linear_infinite]">
               <defs>
                 <path id="circle" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" />
               </defs>
-              <text className="font-[Archivo_Black]" fontSize="13" fill="currentColor" letterSpacing="1">
+              <text className="font-[Archivo_Black]" fontSize="11" fill="currentColor" letterSpacing="1">
                 <textPath href="#circle">GET STARTED FOR FREE • GET STARTED FOR FREE • </textPath>
               </text>
             </svg>
-            <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
-              <path d="M6 30 C 14 12, 28 22, 34 8" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-              <path d="M26 6 L34 8 L31 16" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+            <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
+              <path d="M6 30 C 14 12, 28 22, 34 8" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
+              <path d="M26 6 L34 8 L31 16" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
             </svg>
           </div>
 
-          {/* Hand-drawn cursive arrows — drawn-on handwriting effect, tips point AT the words (not overlapping) */}
-          {/* Bottom-left arrow points up-right toward "ADVANCING" */}
-          <svg
-            className="absolute left-[2%] bottom-[2%] hidden sm:block z-20 pointer-events-none"
-            width="170"
-            height="150"
-            viewBox="0 0 170 150"
-            fill="none"
-          >
-            <g stroke="var(--club-lime)" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" fill="none">
-              <path
-                className="handwrite-path"
-                d="M10 140 C 30 110, 20 80, 55 70 C 90 60, 70 30, 130 22"
-              />
-              <path className="handwrite-path-2" d="M118 10 L134 22 L124 38" />
-            </g>
+          {/* hand-drawn arrows */}
+          <svg className="absolute left-[6%] bottom-[12%] hidden sm:block z-20" width="110" height="110" viewBox="0 0 110 110" fill="none">
+            <path d="M10 100 C 20 50, 50 70, 90 25" stroke="var(--club-lime)" strokeWidth="5" strokeLinecap="round" />
+            <path d="M78 18 L92 24 L86 38" stroke="var(--club-lime)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
           </svg>
-          {/* Top-right arrow points down-left toward "CONNECTING" */}
-          <svg
-            className="absolute right-[2%] top-[4%] hidden sm:block z-20 pointer-events-none"
-            width="170"
-            height="150"
-            viewBox="0 0 170 150"
-            fill="none"
-          >
-            <g stroke="var(--club-lime)" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" fill="none">
-              <path
-                className="handwrite-path"
-                d="M160 10 C 130 30, 145 70, 110 78 C 70 88, 90 120, 35 130"
-              />
-              <path className="handwrite-path-2" d="M48 118 L32 130 L42 146" />
-            </g>
+          <svg className="absolute right-[4%] top-[8%] hidden sm:block z-20" width="100" height="100" viewBox="0 0 100 100" fill="none">
+            <path d="M90 90 C 80 40, 50 60, 15 15" stroke="var(--club-lime)" strokeWidth="5" strokeLinecap="round" />
+            <path d="M28 8 L14 14 L20 28" stroke="var(--club-lime)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
           </svg>
         </div>
 

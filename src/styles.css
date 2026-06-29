@@ -146,24 +146,3 @@
     color: var(--color-foreground);
   }
 }
-
-/* Floating animation for glass cards */
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(var(--tw-rotate, 0deg)); }
-  50% { transform: translateY(-10px) rotate(var(--tw-rotate, 0deg)); }
-}
-
-/* Handwriting (draw-on) effect for arrows */
-.handwrite-path {
-  stroke-dasharray: 400;
-  stroke-dashoffset: 400;
-  animation: handwrite 2.2s ease-out 0.3s forwards;
-}
-.handwrite-path-2 {
-  stroke-dasharray: 80;
-  stroke-dashoffset: 80;
-  animation: handwrite 0.5s ease-out 2.4s forwards;
-}
-@keyframes handwrite {
-  to { stroke-dashoffset: 0; }
-}
