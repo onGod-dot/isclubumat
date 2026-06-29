@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "IS CLUB" },
+      { name: "description", content: "CLUB UMAT is your community hub for connection and engagement." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "IS CLUB" },
+      { property: "og:description", content: "CLUB UMAT is your community hub for connection and engagement." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "IS CLUB" },
+      { name: "twitter:description", content: "CLUB UMAT is your community hub for connection and engagement." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f4726cdc-fc86-4cfd-b251-0483a741937c/id-preview-6ce79085--5cb0f70e-f266-4aa9-8be7-62d528af5089.lovable.app-1782693225906.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f4726cdc-fc86-4cfd-b251-0483a741937c/id-preview-6ce79085--5cb0f70e-f266-4aa9-8be7-62d528af5089.lovable.app-1782693225906.png" },
     ],
     links: [
       {
