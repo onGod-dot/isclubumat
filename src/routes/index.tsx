@@ -76,51 +76,83 @@ function Index() {
             <span className="block">TECHNOLOGY</span>
           </h1>
 
-          {/* Floating glass card — left */}
-          <div className="absolute z-20 left-[14%] top-[44%] hidden sm:block rotate-[-6deg] rounded-3xl border border-white/30 bg-white/15 p-3 backdrop-blur-md shadow-2xl">
-            <img src={logoAsset.url} alt="" className="h-28 w-28 rounded-2xl object-cover" />
+          {/* Floating glass card — sits under the # and above the A of ADVANCING */}
+          <div className="absolute z-20 left-[8%] top-[34%] hidden sm:block rotate-[-6deg] rounded-3xl border border-white/30 bg-white/15 p-3 backdrop-blur-md shadow-2xl animate-[fade-in_0.6s_ease-out]">
+            <img src={logoAsset.url} alt="" className="h-24 w-24 rounded-2xl object-cover" />
             <div className="mt-2 text-center text-white">
               <div className="text-sm font-bold">isclub.umat</div>
               <div className="text-[11px] opacity-80">23 422 members</div>
             </div>
           </div>
 
-          {/* Floating glass card — right */}
-          <div className="absolute z-20 right-[18%] top-[18%] hidden sm:block rotate-[7deg] rounded-3xl border border-white/30 bg-white/15 p-3 backdrop-blur-md shadow-2xl">
-            <img src={logoAsset.url} alt="" className="h-28 w-28 rounded-2xl object-cover" />
+          {/* Floating glass card — right, kept away from headline */}
+          <div className="absolute z-20 right-[6%] top-[22%] hidden sm:block rotate-[7deg] rounded-3xl border border-white/30 bg-white/15 p-3 backdrop-blur-md shadow-2xl">
+            <img src={logoAsset.url} alt="" className="h-24 w-24 rounded-2xl object-cover" />
             <div className="mt-2 text-center text-white">
               <div className="text-sm font-bold">tech.umat</div>
               <div className="text-[11px] opacity-80">293 582 points</div>
             </div>
           </div>
 
-          {/* Spinning sticker */}
+          {/* Spinning sticker — small, sitting on the lower part of the Y in TECHNOLOGY */}
           <div
-            className="absolute right-2 sm:right-6 bottom-2 sm:bottom-6 z-20 flex h-32 w-32 sm:h-40 sm:w-40 items-center justify-center rounded-full text-[color:var(--club-blue-deep)] shadow-xl"
+            className="absolute right-[14%] sm:right-[18%] bottom-[-18px] sm:bottom-[-26px] z-30 flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full text-[color:var(--club-blue-deep)] shadow-xl"
             style={{ backgroundColor: "var(--club-lime)" }}
           >
             <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full animate-[spin_18s_linear_infinite]">
               <defs>
                 <path id="circle" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0" />
               </defs>
-              <text className="font-[Archivo_Black]" fontSize="11" fill="currentColor" letterSpacing="1">
+              <text className="font-[Archivo_Black]" fontSize="12" fill="currentColor" letterSpacing="1">
                 <textPath href="#circle">GET STARTED FOR FREE • GET STARTED FOR FREE • </textPath>
               </text>
             </svg>
-            <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
-              <path d="M6 30 C 14 12, 28 22, 34 8" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
-              <path d="M26 6 L34 8 L31 16" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+            <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+              <path d="M6 30 C 14 12, 28 22, 34 8" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+              <path d="M26 6 L34 8 L31 16" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
             </svg>
           </div>
 
-          {/* hand-drawn arrows */}
-          <svg className="absolute left-[6%] bottom-[12%] hidden sm:block z-20" width="110" height="110" viewBox="0 0 110 110" fill="none">
-            <path d="M10 100 C 20 50, 50 70, 90 25" stroke="var(--club-lime)" strokeWidth="5" strokeLinecap="round" />
-            <path d="M78 18 L92 24 L86 38" stroke="var(--club-lime)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+          {/* Hand-drawn cursive arrow — bottom-left, points UP-RIGHT toward the words */}
+          <svg
+            className="arrow-draw absolute left-[1%] bottom-[6%] hidden sm:block z-20"
+            width="180" height="160" viewBox="0 0 180 160" fill="none"
+            style={{ ['--dash' as any]: 600 }}
+          >
+            <path
+              d="M10 150 C 30 120, 20 90, 55 95 C 80 98, 60 60, 95 65 C 125 70, 110 35, 150 40"
+              stroke="var(--club-lime)" strokeWidth="7" strokeLinecap="round" fill="none"
+            />
+            <path className="arrow-head"
+              d="M132 28 L154 40 L144 60"
+              stroke="var(--club-lime)" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" fill="none"
+            />
+            <g className="arrow-splash" style={{ transformOrigin: '150px 40px' }}>
+              <path d="M160 22 L168 14" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
+              <path d="M165 38 L176 38" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
+              <path d="M158 55 L166 64" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
+            </g>
           </svg>
-          <svg className="absolute right-[4%] top-[8%] hidden sm:block z-20" width="100" height="100" viewBox="0 0 100 100" fill="none">
-            <path d="M90 90 C 80 40, 50 60, 15 15" stroke="var(--club-lime)" strokeWidth="5" strokeLinecap="round" />
-            <path d="M28 8 L14 14 L20 28" stroke="var(--club-lime)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+
+          {/* Hand-drawn cursive arrow — top-right, points DOWN-LEFT toward the words */}
+          <svg
+            className="arrow-draw absolute right-[1%] top-[2%] hidden sm:block z-20"
+            width="180" height="160" viewBox="0 0 180 160" fill="none"
+            style={{ ['--dash' as any]: 600 }}
+          >
+            <path
+              d="M170 10 C 150 40, 165 70, 130 75 C 105 78, 125 110, 90 115 C 60 120, 70 145, 35 140"
+              stroke="var(--club-lime)" strokeWidth="7" strokeLinecap="round" fill="none"
+            />
+            <path className="arrow-head"
+              d="M52 128 L30 140 L42 158"
+              stroke="var(--club-lime)" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" fill="none"
+            />
+            <g className="arrow-splash" style={{ transformOrigin: '30px 140px' }}>
+              <path d="M20 124 L12 116" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
+              <path d="M14 140 L4 140" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
+              <path d="M22 156 L14 164" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
+            </g>
           </svg>
         </div>
 
