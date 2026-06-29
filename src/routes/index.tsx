@@ -113,45 +113,45 @@ function Index() {
             </svg>
           </div>
 
-          {/* Hand-drawn cursive arrow — bottom-left, points UP-RIGHT toward the words */}
+          {/* Curly loop arrow — bottom-left, loops over and points down toward the words */}
           <svg
-            className="arrow-draw absolute left-[1%] bottom-[6%] hidden sm:block z-20"
-            width="180" height="160" viewBox="0 0 180 160" fill="none"
-            style={{ ['--dash' as any]: 600 }}
+            className="arrow-draw absolute left-[2%] bottom-[8%] hidden sm:block z-20"
+            width="190" height="170" viewBox="0 0 200 180" fill="none"
+            style={{ ['--dash' as any]: 700 }}
           >
             <path
-              d="M10 150 C 30 120, 20 90, 55 95 C 80 98, 60 60, 95 65 C 125 70, 110 35, 150 40"
-              stroke="var(--club-lime)" strokeWidth="7" strokeLinecap="round" fill="none"
+              d="M15 150 C 0 90, 50 30, 110 35 C 160 38, 180 80, 140 110 C 110 132, 80 110, 95 80"
+              stroke="var(--club-lime)" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" fill="none"
             />
             <path className="arrow-head"
-              d="M132 28 L154 40 L144 60"
-              stroke="var(--club-lime)" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" fill="none"
+              d="M78 78 L95 78 L100 96"
+              stroke="var(--club-lime)" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" fill="none"
             />
-            <g className="arrow-splash" style={{ transformOrigin: '150px 40px' }}>
-              <path d="M160 22 L168 14" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
-              <path d="M165 38 L176 38" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
-              <path d="M158 55 L166 64" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
+            <g className="arrow-splash" style={{ transformOrigin: '92px 92px' }}>
+              <path d="M70 100 L60 108" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
+              <path d="M105 108 L110 120" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
+              <path d="M88 110 L88 122" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
             </g>
           </svg>
 
-          {/* Hand-drawn cursive arrow — top-right, points DOWN-LEFT toward the words */}
+          {/* Curly loop arrow — top-right, mirrored */}
           <svg
-            className="arrow-draw absolute right-[1%] top-[2%] hidden sm:block z-20"
-            width="180" height="160" viewBox="0 0 180 160" fill="none"
-            style={{ ['--dash' as any]: 600 }}
+            className="arrow-draw absolute right-[2%] top-[4%] hidden sm:block z-20"
+            width="190" height="170" viewBox="0 0 200 180" fill="none"
+            style={{ ['--dash' as any]: 700 }}
           >
             <path
-              d="M170 10 C 150 40, 165 70, 130 75 C 105 78, 125 110, 90 115 C 60 120, 70 145, 35 140"
-              stroke="var(--club-lime)" strokeWidth="7" strokeLinecap="round" fill="none"
+              d="M185 30 C 200 90, 150 150, 90 145 C 40 142, 20 100, 60 70 C 90 48, 120 70, 105 100"
+              stroke="var(--club-lime)" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" fill="none"
             />
             <path className="arrow-head"
-              d="M52 128 L30 140 L42 158"
-              stroke="var(--club-lime)" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" fill="none"
+              d="M122 102 L105 102 L100 84"
+              stroke="var(--club-lime)" strokeWidth="9" strokeLinecap="round" strokeLinejoin="round" fill="none"
             />
-            <g className="arrow-splash" style={{ transformOrigin: '30px 140px' }}>
-              <path d="M20 124 L12 116" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
-              <path d="M14 140 L4 140" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
-              <path d="M22 156 L14 164" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
+            <g className="arrow-splash" style={{ transformOrigin: '108px 88px' }}>
+              <path d="M130 80 L140 72" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
+              <path d="M95 72 L90 60" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
+              <path d="M112 70 L112 58" stroke="var(--club-lime)" strokeWidth="4" strokeLinecap="round" />
             </g>
           </svg>
         </div>
