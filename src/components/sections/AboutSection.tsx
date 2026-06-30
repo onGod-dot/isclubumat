@@ -18,11 +18,11 @@ export default function AboutSection() {
       <div className="max-w-6xl mx-auto">
 
         {/* Label */}
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600 mb-4">About IS Club</p>
+        <p className="is-eyebrow mb-4">About IS Club</p>
 
         {/* Heading + intro */}
         <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
-          <h2 className="text-4xl sm:text-5xl font-black text-gray-950 leading-tight tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] leading-[0.95] tracking-tight">
             Who we are &amp;<br />what we stand for.
           </h2>
           <div className="space-y-4 text-gray-500 text-base leading-relaxed pt-1">
@@ -52,14 +52,14 @@ export default function AboutSection() {
         {/* Mission / Vision row */}
         <div className="grid sm:grid-cols-2 gap-6 mb-16">
           <div className="border border-gray-100 rounded-2xl p-8 bg-[#F8FAFC]">
-            <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-3">Our Mission</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--club-blue-deep)] mb-3">Our Mission</p>
             <p className="text-gray-700 leading-relaxed">
               To empower students at UMaT with the technical skills, industry exposure, and collaborative
               mindset needed to drive innovation in Africa's technology ecosystem.
             </p>
           </div>
           <div className="border border-gray-100 rounded-2xl p-8 bg-[#F8FAFC]">
-            <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-3">Our Vision</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--club-blue-deep)] mb-3">Our Vision</p>
             <p className="text-gray-700 leading-relaxed">
               A campus where every student regardless of department has access to quality technology
               education, mentorship, and the opportunity to build things that matter.
@@ -68,10 +68,10 @@ export default function AboutSection() {
         </div>
 
         {/* Core values */}
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600 mb-6">Core Values</p>
+        <p className="is-eyebrow mb-6">Core Values</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {values.map((v) => (
-            <div key={v.title} className="border border-gray-100 rounded-2xl p-6 hover:border-blue-200 hover:-translate-y-0.5 transition-all duration-200">
+            <div key={v.title} className="border border-gray-100 rounded-2xl p-6 hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200">
               <div className="text-base font-bold text-gray-950 mb-2">{v.title}</div>
               <p className="text-sm text-gray-500 leading-relaxed">{v.desc}</p>
             </div>

@@ -56,7 +56,7 @@ const events = [
 ];
 
 const typeColors: Record<string, string> = {
-  Hackathon: "bg-blue-50 text-blue-700",
+  Hackathon: "bg-[color:var(--club-blue-deep)]/5 text-[color:var(--club-blue-deep)]",
   Competition: "bg-red-50 text-red-700",
   "Tech Talk": "bg-violet-50 text-violet-700",
   Bootcamp: "bg-amber-50 text-amber-700",
@@ -69,14 +69,14 @@ export default function EventsSection() {
     <section id="events" className="bg-white py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600 mb-4">Events</p>
+        <p className="is-eyebrow mb-4">Events</p>
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
-          <h2 className="text-4xl sm:text-5xl font-black text-gray-950 leading-tight tracking-tight max-w-lg">
+          <h2 className="text-4xl sm:text-5xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] leading-[0.95] tracking-tight max-w-lg">
             Upcoming events &amp; activities.
           </h2>
           <a
             href="#"
-            className="text-sm font-semibold text-blue-600 hover:text-blue-800 transition whitespace-nowrap"
+            className="text-sm font-semibold text-[color:var(--club-blue-deep)] hover:text-black transition whitespace-nowrap"
           >
             View full calendar →
           </a>
@@ -86,7 +86,7 @@ export default function EventsSection() {
           {events.map((e) => (
             <div
               key={e.title}
-              className="border border-gray-100 rounded-2xl p-6 flex flex-col gap-4 hover:border-blue-200 hover:-translate-y-0.5 transition-all duration-200 bg-[#F8FAFC]"
+              className="border border-gray-100 rounded-2xl p-6 flex flex-col gap-4 hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200 bg-[#F8FAFC]"
             >
               <div className="flex items-center justify-between">
                 <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${typeColors[e.type] ?? "bg-gray-100 text-gray-600"}`}>
@@ -104,7 +104,7 @@ export default function EventsSection() {
               </div>
               <a
                 href="#"
-                className="mt-1 text-center rounded-xl py-2.5 text-sm font-semibold bg-gray-950 text-white hover:bg-blue-700 transition-colors duration-150"
+                className="mt-1 text-center rounded-xl py-2.5 text-sm font-semibold bg-gray-950 text-white hover:bg-[color:var(--club-blue-deep)] transition-colors duration-150"
               >
                 Register
               </a>
