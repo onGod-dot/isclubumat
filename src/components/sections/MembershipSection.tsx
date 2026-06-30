@@ -43,7 +43,7 @@ export default function MembershipSection() {
     <section id="membership" className="bg-white py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--club-blue-deep)] mb-4">Membership</p>
+        <p className="is-eyebrow mb-4">Membership</p>
         <div className="grid lg:grid-cols-2 gap-16 items-start">
 
           {/* Left — benefits + FAQ */}
@@ -70,7 +70,7 @@ export default function MembershipSection() {
             </ul>
 
             {/* FAQ */}
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--club-blue-deep)] mb-4">FAQs</p>
+            <p className="is-eyebrow mb-4">FAQs</p>
             <div className="divide-y divide-gray-100 border border-gray-100 rounded-2xl overflow-hidden">
               {faqs.map((f, i) => (
                 <div key={i}>

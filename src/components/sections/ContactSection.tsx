@@ -3,7 +3,7 @@ export default function ContactSection() {
     <section id="contact" className="bg-[#F8FAFC] py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--club-blue-deep)] mb-4">Contact</p>
+        <p className="is-eyebrow mb-4">Contact</p>
         <div className="grid lg:grid-cols-2 gap-16">
 
           {/* Left */}

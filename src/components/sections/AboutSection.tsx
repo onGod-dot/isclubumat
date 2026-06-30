@@ -18,7 +18,7 @@ export default function AboutSection() {
       <div className="max-w-6xl mx-auto">
 
         {/* Label */}
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--club-blue-deep)] mb-4">About IS Club</p>
+        <p className="is-eyebrow mb-4">About IS Club</p>
 
         {/* Heading + intro */}
         <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
@@ -68,7 +68,7 @@ export default function AboutSection() {
         </div>
 
         {/* Core values */}
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--club-blue-deep)] mb-6">Core Values</p>
+        <p className="is-eyebrow mb-6">Core Values</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {values.map((v) => (
             <div key={v.title} className="border border-gray-100 rounded-2xl p-6 hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200">
