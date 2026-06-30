@@ -1,3 +1,5 @@
+import { Clock, MapPin, CalendarDays } from "lucide-react";
+
 const events = [
   {
     title: "Annual Hackathon",
@@ -98,9 +100,19 @@ export default function EventsSection() {
                 <div className="font-bold text-gray-950 text-base mb-1">{e.title}</div>
                 <p className="text-sm text-gray-500 leading-relaxed">{e.desc}</p>
               </div>
-              <div className="text-xs text-gray-400 space-y-0.5 mt-auto">
-                <div>🕐 {e.time}</div>
-                <div>📍 {e.venue}</div>
+              <div className="text-xs text-gray-500 space-y-1.5 mt-auto border-t border-gray-100 pt-4">
+                <div className="flex items-center gap-2">
+                  <CalendarDays size={13} className="text-gray-400" />
+                  <span>{e.date}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock size={13} className="text-gray-400" />
+                  <span>{e.time}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin size={13} className="text-gray-400" />
+                  <span>{e.venue}</span>
+                </div>
               </div>
               <a
                 href="#"

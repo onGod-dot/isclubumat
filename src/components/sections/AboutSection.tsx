@@ -1,3 +1,5 @@
+import { Lightbulb, Users, Award, HeartHandshake, Target, Eye } from "lucide-react";
+
 const stats = [
   { value: "500+", label: "Members" },
   { value: "12", label: "Active Projects" },
@@ -6,10 +8,10 @@ const stats = [
 ];
 
 const values = [
-  { title: "Innovation", desc: "We push boundaries and explore emerging technologies to solve real-world problems." },
-  { title: "Collaboration", desc: "We build together — across disciplines, departments, and year groups." },
-  { title: "Excellence", desc: "We hold ourselves to high standards in everything we learn, build, and ship." },
-  { title: "Inclusion", desc: "Every student with a passion for technology has a home here, regardless of background." },
+  { title: "Innovation", desc: "We push boundaries and explore emerging technologies to solve real-world problems.", icon: Lightbulb },
+  { title: "Collaboration", desc: "We build together — across disciplines, departments, and year groups.", icon: Users },
+  { title: "Excellence", desc: "We hold ourselves to high standards in everything we learn, build, and ship.", icon: Award },
+  { title: "Inclusion", desc: "Every student with a passion for technology has a home here, regardless of background.", icon: HeartHandshake },
 ];
 
 export default function AboutSection() {
@@ -52,6 +54,9 @@ export default function AboutSection() {
         {/* Mission / Vision row */}
         <div className="grid sm:grid-cols-2 gap-6 mb-16">
           <div className="border border-gray-100 rounded-2xl p-8 bg-[#F8FAFC]">
+            <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--club-blue-deep)] text-white mb-4">
+              <Target size={18} strokeWidth={2.25} />
+            </div>
             <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--club-blue-deep)] mb-3">Our Mission</p>
             <p className="text-gray-700 leading-relaxed">
               To empower students at UMaT with the technical skills, industry exposure, and collaborative
@@ -59,6 +64,9 @@ export default function AboutSection() {
             </p>
           </div>
           <div className="border border-gray-100 rounded-2xl p-8 bg-[#F8FAFC]">
+            <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--club-lime)] text-[color:var(--club-blue-deep)] mb-4">
+              <Eye size={18} strokeWidth={2.25} />
+            </div>
             <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--club-blue-deep)] mb-3">Our Vision</p>
             <p className="text-gray-700 leading-relaxed">
               A campus where every student regardless of department has access to quality technology
@@ -70,12 +78,18 @@ export default function AboutSection() {
         {/* Core values */}
         <p className="is-eyebrow mb-6">Core Values</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {values.map((v) => (
-            <div key={v.title} className="border border-gray-100 rounded-2xl p-6 hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200">
+          {values.map((v) => {
+            const Icon = v.icon;
+            return (
+            <div key={v.title} className="group border border-gray-100 rounded-2xl p-6 hover:border-[color:var(--club-blue-deep)]/40 hover:shadow-[0_18px_40px_-24px_rgba(15,23,42,0.25)] hover:-translate-y-0.5 transition-all duration-200">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--club-blue-deep)]/5 text-[color:var(--club-blue-deep)] ring-1 ring-inset ring-[color:var(--club-blue-deep)]/10 mb-4 group-hover:bg-[color:var(--club-blue-deep)] group-hover:text-white transition-colors">
+                <Icon size={18} strokeWidth={2} />
+              </span>
               <div className="text-base font-bold text-gray-950 mb-2">{v.title}</div>
               <p className="text-sm text-gray-500 leading-relaxed">{v.desc}</p>
             </div>
-          ))}
+            );
+          })}
         </div>
 
       </div>

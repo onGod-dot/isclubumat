@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Check, Plus, Minus } from "lucide-react";
 
 const benefits = [
   "Access to all workshops, bootcamps, and tech talks",
@@ -59,10 +60,8 @@ export default function MembershipSection() {
             <ul className="space-y-3 mb-12">
               {benefits.map((b) => (
                 <li key={b} className="flex items-start gap-3 text-sm text-gray-700">
-                  <span className="mt-0.5 w-4 h-4 rounded-full bg-[color:var(--club-blue-deep)] flex items-center justify-center flex-shrink-0">
-                    <svg width="8" height="6" viewBox="0 0 8 6" fill="none">
-                      <path d="M1 3l2 2 4-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                  <span className="mt-0.5 inline-flex h-5 w-5 rounded-full bg-[color:var(--club-blue-deep)] items-center justify-center flex-shrink-0">
+                    <Check size={12} strokeWidth={3} className="text-white" />
                   </span>
                   {b}
                 </li>
@@ -79,7 +78,9 @@ export default function MembershipSection() {
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   >
                     {f.q}
-                    <span className="ml-4 text-gray-400 text-lg leading-none">{openFaq === i ? "−" : "+"}</span>
+                    <span className="ml-4 inline-flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 text-gray-500">
+                      {openFaq === i ? <Minus size={12} /> : <Plus size={12} />}
+                    </span>
                   </button>
                   {openFaq === i && (
                     <div className="px-5 pb-4 text-sm text-gray-500 leading-relaxed">{f.a}</div>

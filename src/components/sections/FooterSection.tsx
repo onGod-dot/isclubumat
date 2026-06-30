@@ -1,3 +1,12 @@
+import { Twitter, Linkedin, Github, Instagram, ArrowRight } from "lucide-react";
+
+const socials = [
+  { name: "X", href: "#", icon: Twitter },
+  { name: "LinkedIn", href: "#", icon: Linkedin },
+  { name: "GitHub", href: "#", icon: Github },
+  { name: "Instagram", href: "#", icon: Instagram },
+];
+
 const links = {
   "Quick Links": ["Home", "About", "Departments", "Events", "Projects", "Gallery", "News"],
   "Resources": ["Programming", "AI & ML", "Cybersecurity", "Cloud", "Data Science", "Career"],
@@ -20,10 +29,20 @@ export default function FooterSection() {
             <p className="text-sm text-gray-400 leading-relaxed mb-6 max-w-xs">
               The Information Systems &amp; Technology Club at the University of Mines and Technology, Tarkwa, Ghana.
             </p>
-            <div className="flex gap-4">
-              {["X", "LinkedIn", "GitHub", "Instagram"].map((s) => (
-                <a key={s} href="#" className="text-xs text-gray-500 hover:text-white transition">{s}</a>
-              ))}
+            <div className="flex gap-2">
+              {socials.map((s) => {
+                const Icon = s.icon;
+                return (
+                  <a
+                    key={s.name}
+                    href={s.href}
+                    aria-label={s.name}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 text-gray-400 hover:text-[color:var(--club-blue-deep)] hover:bg-[color:var(--club-lime)] hover:border-[color:var(--club-lime)] transition-all"
+                  >
+                    <Icon size={15} />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
@@ -58,9 +77,9 @@ export default function FooterSection() {
             />
             <button
               type="submit"
-              className="rounded-xl px-5 py-2.5 text-sm font-semibold bg-[color:var(--club-blue-deep)] hover:bg-[color:var(--club-blue-deep)] transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-xl px-5 py-2.5 text-sm font-semibold bg-[color:var(--club-lime)] text-[color:var(--club-blue-deep)] hover:bg-white transition-colors"
             >
-              Subscribe
+              Subscribe <ArrowRight size={14} />
             </button>
           </form>
         </div>
