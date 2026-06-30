@@ -13,23 +13,23 @@ export async function streamCompletion(
   onDone: () => void,
   onError: (err: AIError) => void
 ): Promise<void> {
-  const apiKey = import.meta.env.VITE_TOGETHER_API_KEY as string | undefined;
+  const apiKey = import.meta.env.VITE_GROQ_API_KEY as string | undefined;
 
   if (!apiKey) {
-    onError({ type: "auth", message: "No API key found. Set VITE_TOGETHER_API_KEY in your .env file." });
+    onError({ type: "auth", message: "No API key found. Set VITE_GROQ_API_KEY in your .env file." });
     return;
   }
 
   let response: Response;
   try {
-    response = await fetch("https://api.together.xyz/v1/chat/completions", {
+    response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+        model: "llama-3.3-70b-versatile",
         messages,
         stream: true,
         max_tokens: 512,
@@ -37,17 +37,17 @@ export async function streamCompletion(
       }),
     });
   } catch {
-    onError({ type: "network", message: "Could not reach Together AI. Check your connection." });
+    onError({ type: "network", message: "Could not reach Groq. Check your connection." });
     return;
   }
 
   if (!response.ok) {
     if (response.status === 401) {
-      onError({ type: "auth", message: "Invalid API key. Check VITE_TOGETHER_API_KEY." });
+      onError({ type: "auth", message: "Invalid API key. Check VITE_GROQ_API_KEY." });
     } else if (response.status === 429) {
       onError({ type: "rate_limit", message: "Rate limit hit. Please wait a moment and try again." });
     } else if (response.status >= 500) {
-      onError({ type: "server", message: `Together AI server error (${response.status}). Try again shortly.` });
+      onError({ type: "server", message: `Groq server error (${response.status}). Try again shortly.` });
     } else {
       onError({ type: "unknown", message: `Unexpected error (${response.status}).` });
     }
