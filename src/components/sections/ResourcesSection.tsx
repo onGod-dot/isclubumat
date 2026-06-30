@@ -1,7 +1,17 @@
+import {
+  Code2,
+  BrainCircuit,
+  ShieldCheck,
+  Cloud,
+  LineChart,
+  Briefcase,
+  ArrowUpRight,
+} from "lucide-react";
+
 const categories = [
   {
     name: "Programming",
-    icon: "⌨",
+    icon: Code2,
     resources: [
       { title: "The Odin Project", type: "Course", url: "https://www.theodinproject.com" },
       { title: "freeCodeCamp", type: "Course", url: "https://www.freecodecamp.org" },
@@ -10,7 +20,7 @@ const categories = [
   },
   {
     name: "AI & Machine Learning",
-    icon: "◈",
+    icon: BrainCircuit,
     resources: [
       { title: "Fast.ai", type: "Course", url: "https://www.fast.ai" },
       { title: "DeepLearning.AI", type: "Course", url: "https://www.deeplearning.ai" },
@@ -19,7 +29,7 @@ const categories = [
   },
   {
     name: "Cybersecurity",
-    icon: "⊕",
+    icon: ShieldCheck,
     resources: [
       { title: "TryHackMe", type: "Practice", url: "https://tryhackme.com" },
       { title: "Hack The Box", type: "Practice", url: "https://www.hackthebox.com" },
@@ -28,7 +38,7 @@ const categories = [
   },
   {
     name: "Cloud & DevOps",
-    icon: "△",
+    icon: Cloud,
     resources: [
       { title: "AWS Free Tier", type: "Platform", url: "https://aws.amazon.com/free" },
       { title: "Google Cloud Skills Boost", type: "Course", url: "https://cloudskillsboost.google" },
@@ -37,7 +47,7 @@ const categories = [
   },
   {
     name: "Data Science",
-    icon: "≈",
+    icon: LineChart,
     resources: [
       { title: "Kaggle Datasets", type: "Data", url: "https://www.kaggle.com/datasets" },
       { title: "Towards Data Science", type: "Articles", url: "https://towardsdatascience.com" },
@@ -46,7 +56,7 @@ const categories = [
   },
   {
     name: "Career & Interviews",
-    icon: "◇",
+    icon: Briefcase,
     resources: [
       { title: "LeetCode", type: "Practice", url: "https://leetcode.com" },
       { title: "Levels.fyi", type: "Salaries", url: "https://www.levels.fyi" },
@@ -81,10 +91,14 @@ export default function ResourcesSection() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {categories.map((cat) => (
-            <div key={cat.name} className="border border-gray-100 rounded-2xl p-6 bg-[#F8FAFC] hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-xl text-[color:var(--club-blue-deep)]">{cat.icon}</span>
+          {categories.map((cat) => {
+            const Icon = cat.icon;
+            return (
+            <div key={cat.name} className="group border border-gray-100 rounded-2xl p-6 bg-white hover:border-[color:var(--club-blue-deep)]/40 hover:shadow-[0_18px_40px_-24px_rgba(15,23,42,0.25)] hover:-translate-y-0.5 transition-all duration-200">
+              <div className="flex items-center gap-3 mb-5 pb-5 border-b border-gray-100">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--club-blue-deep)]/5 text-[color:var(--club-blue-deep)] ring-1 ring-inset ring-[color:var(--club-blue-deep)]/10 group-hover:bg-[color:var(--club-blue-deep)] group-hover:text-white transition-colors">
+                  <Icon size={18} strokeWidth={2} />
+                </span>
                 <span className="font-bold text-gray-950 text-sm">{cat.name}</span>
               </div>
               <ul className="space-y-3">
@@ -94,9 +108,10 @@ export default function ResourcesSection() {
                       href={r.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-gray-700 hover:text-[color:var(--club-blue-deep)] transition truncate"
+                      className="text-sm text-gray-700 hover:text-[color:var(--club-blue-deep)] transition truncate inline-flex items-center gap-1.5 group/link"
                     >
                       {r.title}
+                      <ArrowUpRight size={12} className="opacity-0 group-hover/link:opacity-100 transition" />
                     </a>
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full flex-shrink-0 ${typeColors[r.type] ?? "bg-gray-100 text-gray-600"}`}>
                       {r.type}
@@ -105,7 +120,8 @@ export default function ResourcesSection() {
                 ))}
               </ul>
             </div>
-          ))}
+            );
+          })}
         </div>
 
       </div>

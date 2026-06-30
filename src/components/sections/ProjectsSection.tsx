@@ -1,3 +1,5 @@
+import { Github, ExternalLink, Users } from "lucide-react";
+
 const projects = [
   {
     title: "IS Club Website",
@@ -108,9 +110,21 @@ export default function ProjectsSection() {
                   </span>
                 ))}
               </div>
-              <div className="flex gap-3 text-sm font-semibold">
-                <a href={p.github} className="text-gray-950 hover:text-[color:var(--club-blue-deep)] transition">GitHub ↗</a>
-                {p.demo && <a href={p.demo} className="text-[color:var(--club-blue-deep)] hover:text-black transition">Live Demo ↗</a>}
+              <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                <span className="inline-flex items-center gap-1.5 text-[11px] text-gray-500">
+                  <Users size={12} />
+                  {p.team[0]}
+                </span>
+                <div className="flex items-center gap-3 text-xs font-semibold">
+                  <a href={p.github} className="inline-flex items-center gap-1 text-gray-700 hover:text-[color:var(--club-blue-deep)] transition">
+                    <Github size={13} /> Code
+                  </a>
+                  {p.demo && (
+                    <a href={p.demo} className="inline-flex items-center gap-1 text-[color:var(--club-blue-deep)] hover:text-black transition">
+                      <ExternalLink size={13} /> Demo
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           ))}
