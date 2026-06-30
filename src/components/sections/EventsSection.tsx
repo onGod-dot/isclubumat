@@ -71,7 +71,7 @@ export default function EventsSection() {
 
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--club-blue-deep)] mb-4">Events</p>
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
-          <h2 className="text-4xl sm:text-5xl font-black text-gray-950 leading-tight tracking-tight max-w-lg">
+          <h2 className="text-4xl sm:text-5xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] leading-[0.95] tracking-tight max-w-lg">
             Upcoming events &amp; activities.
           </h2>
           <a

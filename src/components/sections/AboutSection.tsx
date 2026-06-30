@@ -22,7 +22,7 @@ export default function AboutSection() {
 
         {/* Heading + intro */}
         <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
-          <h2 className="text-4xl sm:text-5xl font-black text-gray-950 leading-tight tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] leading-[0.95] tracking-tight">
             Who we are &amp;<br />what we stand for.
           </h2>
           <div className="space-y-4 text-gray-500 text-base leading-relaxed pt-1">

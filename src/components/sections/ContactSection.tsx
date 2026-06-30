@@ -8,7 +8,7 @@ export default function ContactSection() {
 
           {/* Left */}
           <div>
-            <h2 className="text-4xl sm:text-5xl font-black text-gray-950 leading-tight tracking-tight mb-6">
+            <h2 className="text-4xl sm:text-5xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] leading-[0.95] tracking-tight mb-6">
               Get in touch.
             </h2>
             <p className="text-gray-500 text-base leading-relaxed mb-10 max-w-md">

@@ -48,7 +48,7 @@ export default function MembershipSection() {
 
           {/* Left — benefits + FAQ */}
           <div>
-            <h2 className="text-4xl sm:text-5xl font-black text-gray-950 leading-tight tracking-tight mb-6">
+            <h2 className="text-4xl sm:text-5xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] leading-[0.95] tracking-tight mb-6">
               Join the club.<br />Shape the future.
             </h2>
             <p className="text-gray-500 text-base leading-relaxed mb-10">
@@ -91,7 +91,7 @@ export default function MembershipSection() {
 
           {/* Right — registration form */}
           <div className="border border-gray-100 rounded-2xl p-8 bg-[#F8FAFC]">
-            <h3 className="text-xl font-black text-gray-950 mb-6">Register your interest</h3>
+            <h3 className="text-xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] tracking-tight mb-6">Register your interest</h3>
             <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
