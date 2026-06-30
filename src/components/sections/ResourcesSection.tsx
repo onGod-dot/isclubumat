@@ -56,7 +56,7 @@ const categories = [
 ];
 
 const typeColors: Record<string, string> = {
-  Course: "bg-blue-50 text-blue-700",
+  Course: "bg-[color:var(--club-blue-deep)]/5 text-[color:var(--club-blue-deep)]",
   Practice: "bg-green-50 text-green-700",
   Reference: "bg-violet-50 text-violet-700",
   Platform: "bg-amber-50 text-amber-700",
@@ -70,7 +70,7 @@ export default function ResourcesSection() {
     <section id="resources" className="bg-white py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600 mb-4">Learning Resources</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--club-blue-deep)] mb-4">Learning Resources</p>
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
           <h2 className="text-4xl sm:text-5xl font-black text-gray-950 leading-tight tracking-tight max-w-lg">
             Curated resources for every track.
@@ -82,9 +82,9 @@ export default function ResourcesSection() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {categories.map((cat) => (
-            <div key={cat.name} className="border border-gray-100 rounded-2xl p-6 bg-[#F8FAFC] hover:border-blue-200 hover:-translate-y-0.5 transition-all duration-200">
+            <div key={cat.name} className="border border-gray-100 rounded-2xl p-6 bg-[#F8FAFC] hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-xl text-blue-600">{cat.icon}</span>
+                <span className="text-xl text-[color:var(--club-blue-deep)]">{cat.icon}</span>
                 <span className="font-bold text-gray-950 text-sm">{cat.name}</span>
               </div>
               <ul className="space-y-3">
@@ -94,7 +94,7 @@ export default function ResourcesSection() {
                       href={r.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-gray-700 hover:text-blue-600 transition truncate"
+                      className="text-sm text-gray-700 hover:text-[color:var(--club-blue-deep)] transition truncate"
                     >
                       {r.title}
                     </a>

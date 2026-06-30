@@ -15,7 +15,7 @@ export default function FooterSection() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <span className="font-black text-lg tracking-tight">IS CLUB</span>
-              <span className="text-xs font-semibold text-blue-400 bg-blue-950 px-2 py-0.5 rounded-full">UMAT</span>
+              <span className="text-xs font-semibold text-[color:var(--club-lime)] bg-black px-2 py-0.5 rounded-full">UMAT</span>
             </div>
             <p className="text-sm text-gray-400 leading-relaxed mb-6 max-w-xs">
               The Information Systems &amp; Technology Club at the University of Mines and Technology, Tarkwa, Ghana.
@@ -54,11 +54,11 @@ export default function FooterSection() {
               type="email"
               required
               placeholder="your@email.com"
-              className="flex-1 sm:w-64 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+              className="flex-1 sm:w-64 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[color:var(--club-blue-deep)] transition"
             />
             <button
               type="submit"
-              className="rounded-xl px-5 py-2.5 text-sm font-semibold bg-blue-700 hover:bg-blue-600 transition-colors"
+              className="rounded-xl px-5 py-2.5 text-sm font-semibold bg-[color:var(--club-blue-deep)] hover:bg-[color:var(--club-blue-deep)] transition-colors"
             >
               Subscribe
             </button>
