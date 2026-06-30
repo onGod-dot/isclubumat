@@ -77,7 +77,7 @@ const typeColors: Record<string, string> = {
 
 export default function ResourcesSection() {
   return (
-    <section id="resources" className="bg-white py-24 px-5 sm:px-8">
+    <section id="resources" className="bg-white border-t border-gray-100 py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
         <p className="is-eyebrow mb-4">Learning Resources</p>
@@ -94,7 +94,7 @@ export default function ResourcesSection() {
           {categories.map((cat) => {
             const Icon = cat.icon;
             return (
-            <div key={cat.name} className="group border border-gray-100 rounded-2xl p-6 bg-white hover:border-[color:var(--club-blue-deep)]/40 hover:shadow-[0_18px_40px_-24px_rgba(15,23,42,0.25)] hover:-translate-y-0.5 transition-all duration-200">
+            <div key={cat.name} className="group border border-gray-100 rounded-2xl p-6 bg-[#F8FAFC] hover:border-[color:var(--club-blue-deep)]/40 hover:shadow-[0_18px_40px_-24px_rgba(15,23,42,0.25)] hover:-translate-y-0.5 transition-all duration-200">
               <div className="flex items-center gap-3 mb-5 pb-5 border-b border-gray-100">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--club-blue-deep)]/5 text-[color:var(--club-blue-deep)] ring-1 ring-inset ring-[color:var(--club-blue-deep)]/10 group-hover:bg-[color:var(--club-blue-deep)] group-hover:text-white transition-colors">
                   <Icon size={18} strokeWidth={2} />

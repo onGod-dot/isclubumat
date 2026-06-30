@@ -41,7 +41,7 @@ export default function MembershipSection() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <section id="membership" className="bg-white py-24 px-5 sm:px-8">
+    <section id="membership" className="bg-[#F8FAFC] border-t border-gray-100 py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
         <p className="is-eyebrow mb-4">Membership</p>
@@ -91,7 +91,7 @@ export default function MembershipSection() {
           </div>
 
           {/* Right — registration form */}
-          <div className="border border-gray-100 rounded-2xl p-8 bg-[#F8FAFC]">
+          <div className="border border-gray-100 rounded-2xl p-8 bg-white">
             <h3 className="text-xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] tracking-tight mb-6">Register your interest</h3>
             <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
               <div className="grid sm:grid-cols-2 gap-4">

@@ -3,7 +3,6 @@ import logoUrl from "@/assets/is-club-logo.jpeg";
 import Shuffle from "@/components/Shuffle";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import AboutSection from "@/components/sections/AboutSection";
-import DepartmentsSection from "@/components/sections/DepartmentsSection";
 import EventsSection from "@/components/sections/EventsSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import MembershipSection from "@/components/sections/MembershipSection";
@@ -118,7 +117,6 @@ function Index() {
     <div className="font-[Inter]">
       <MarqueeBanner />
       <AboutSection />
-      <DepartmentsSection />
       <EventsSection />
       <ProjectsSection />
       <MembershipSection />

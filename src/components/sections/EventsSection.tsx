@@ -68,7 +68,7 @@ const typeColors: Record<string, string> = {
 
 export default function EventsSection() {
   return (
-    <section id="events" className="bg-white py-24 px-5 sm:px-8">
+    <section id="events" className="bg-[#F8FAFC] border-t border-gray-100 py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
         <p className="is-eyebrow mb-4">Events</p>
@@ -88,7 +88,7 @@ export default function EventsSection() {
           {events.map((e) => (
             <div
               key={e.title}
-              className="border border-gray-100 rounded-2xl p-6 flex flex-col gap-4 hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200 bg-[#F8FAFC]"
+              className="border border-gray-100 rounded-2xl p-6 flex flex-col gap-4 hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200 bg-white"
             >
               <div className="flex items-center justify-between">
                 <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${typeColors[e.type] ?? "bg-gray-100 text-gray-600"}`}>

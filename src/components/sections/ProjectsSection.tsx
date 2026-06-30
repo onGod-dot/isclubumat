@@ -72,7 +72,7 @@ const statusColors: Record<string, string> = {
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="bg-[#F8FAFC] py-24 px-5 sm:px-8">
+    <section id="projects" className="bg-white border-t border-gray-100 py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
         <p className="is-eyebrow mb-4">Projects</p>
@@ -89,7 +89,7 @@ export default function ProjectsSection() {
           {projects.map((p) => (
             <div
               key={p.title}
-              className="bg-white border border-gray-100 rounded-2xl p-6 flex flex-col gap-4 hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200"
+              className="bg-[#F8FAFC] border border-gray-100 rounded-2xl p-6 flex flex-col gap-4 hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200"
             >
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[color:var(--club-blue-deep)]/5 text-[color:var(--club-blue-deep)]">

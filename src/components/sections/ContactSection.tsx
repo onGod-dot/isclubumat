@@ -15,7 +15,7 @@ const socials = [
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="bg-[#F8FAFC] py-24 px-5 sm:px-8">
+    <section id="contact" className="bg-[#F8FAFC] border-t border-gray-100 py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
         <p className="is-eyebrow mb-4">Contact</p>

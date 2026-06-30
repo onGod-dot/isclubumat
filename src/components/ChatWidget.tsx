@@ -154,9 +154,11 @@ const errorMeta: Record<AIError["type"], { icon: string; label: string }> = {
 interface ChatWidgetProps {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
+  initialMessage?: string;
+  onInitialMessageConsumed?: () => void;
 }
 
-export default function ChatWidget({ isOpen, onOpenChange }: ChatWidgetProps) {
+export default function ChatWidget({ isOpen, onOpenChange, initialMessage, onInitialMessageConsumed }: ChatWidgetProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
@@ -188,7 +190,44 @@ export default function ChatWidget({ isOpen, onOpenChange }: ChatWidgetProps) {
     }
   }, [isOpen, messages, forceScrollToBottom]);
 
-  // Ctrl+K global toggle
+  // Auto-send message passed from MorphPanel
+  useEffect(() => {
+    if (initialMessage && isOpen) {
+      setInput(initialMessage);
+      onInitialMessageConsumed?.();
+      // Slight delay so the widget has rendered
+      setTimeout(() => {
+        setInput("");
+        setHistoryIdx(-1);
+        setCmdHistory((h) => [initialMessage, ...h].slice(0, 50));
+        const userMsgId = uid();
+        setMessages((prev) => [...prev, { id: userMsgId, role: "user", content: initialMessage }]);
+        setTimeout(forceScrollToBottom, 20);
+
+        const cmdOut = runCommand(initialMessage, []);
+        if (cmdOut !== null) {
+          if (cmdOut === "__CLEAR__") { setMessages([]); return; }
+          addBotMessage(cmdOut, { isTerminal: true });
+          return;
+        }
+
+        const section = detectIntent(initialMessage);
+        setIsTyping(true);
+        const botId = uid();
+        setMessages((prev) => [...prev, { id: botId, role: "bot", content: "", isStreaming: true }]);
+        aiHistoryRef.current = [...aiHistoryRef.current, { role: "user", content: initialMessage }];
+        const context = buildContext(aiHistoryRef.current);
+        let fullResponse = "";
+        streamCompletion(
+          context,
+          (chunk) => { fullResponse += chunk; setMessages((prev) => prev.map((m) => m.id === botId ? { ...m, content: fullResponse } : m)); forceScrollToBottom(); },
+          () => { setIsTyping(false); aiHistoryRef.current = [...aiHistoryRef.current, { role: "assistant", content: fullResponse }]; typewriteMessage(fullResponse, botId, setMessages, () => { forceScrollToBottom(); if (section) scrollToSection(section); }); },
+          (err) => { setIsTyping(false); const meta = errorMeta[err.type]; setMessages((prev) => prev.map((m) => m.id === botId ? { ...m, content: `${meta.icon} **${meta.label}:** ${err.message}`, isStreaming: false, isError: true } : m)); }
+        );
+      }, 120);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialMessage, isOpen]);
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.key === "k") {
