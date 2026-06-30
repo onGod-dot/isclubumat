@@ -374,7 +374,7 @@ const Shuffle: React.FC<ShuffleProps> = ({
     [ready, className]
   );
 
-  const Tag = (tag || 'p') as keyof JSX.IntrinsicElements;
+  const Tag = (tag || 'p') as keyof React.JSX.IntrinsicElements;
   return React.createElement(Tag, { ref, className: classes, style: commonStyle }, text);
 };
 
