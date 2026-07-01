@@ -9,6 +9,30 @@ const DRIVE = (id: string) => `https://drive.google.com/drive/folders/${id}`;
 
 const semesters = [
   {
+    name: "L100 — 1st Semester",
+    icon: BookOpen,
+    url: DRIVE("1-4zpEgxG_2r5V7D4rCUmNTYrDsG-Maor"),
+    courses: [
+      { title: "Applied Electricity", id: "1z125hIDa3_O13OwB35k25-pVF9y9_Dt2" },
+      { title: "Intro to Computing", id: "1U3D85lkywKTO2rCWc0nO7Uqe-QXzlUEX" },
+      { title: "Linear Algebra", id: "1q0pEJNoQCQvwJuDkronsGB980mfTa78o" },
+      { title: "Multimedia", id: "1X0j0KmdA1qat3G3_icsvnvxRq5qqj4Vx" },
+      { title: "Python", id: "1nF0WeOOnv8cmzcdUC37WSI_cVNW8Fz8k" },
+    ],
+  },
+  {
+    name: "L100 — 2nd Semester",
+    icon: BookOpen,
+    url: DRIVE("1-IXigTE7wnv83xFdUkB02V9y6spd0qDV"),
+    courses: [
+      { title: "Communication Skills", id: "1yWj4FrQCsPtMPXpWdKnSR9cmd79mUs8F" },
+      { title: "OOP", id: "149SIaB5r5-rGge3NvFai7rDx4pASDz41" },
+      { title: "Web Development", id: "1ycxp7BHN2PM0vFEOg0t1aOzL597NjmXh" },
+      { title: "Tutorial Links", id: "1f8TZb1AxfWL2YnW_Z7_zUDgI7MbXqene" },
+      { title: "Course Outline (IS&T)", id: "1UT96m9Vbw94GSeJr_yIBzJQ3RJ_37HF-" },
+    ],
+  },
+  {
     name: "L200 — 1st Semester",
     icon: BookOpen,
     url: DRIVE("1-VszIbP8ile8a4V5KpFjU_0Et6LoPwSe"),
