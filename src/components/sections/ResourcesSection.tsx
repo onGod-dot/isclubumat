@@ -9,7 +9,36 @@ const DRIVE = (id: string) => `https://drive.google.com/drive/folders/${id}`;
 
 const semesters = [
   {
-    name: "1st Semester",
+    name: "L200 — 1st Semester",
+    icon: BookOpen,
+    url: DRIVE("1-VszIbP8ile8a4V5KpFjU_0Et6LoPwSe"),
+    courses: [
+      { title: "Advanced Database", id: "1JuelD-EMHD93AEH8cOv-emz7nHwPPzuq" },
+      { title: "Computer Graphics", id: "1TlzjTivhShH8l3AMD7_b9QVYORDWpBcK" },
+      { title: "Computer Architecture", id: "1NmEQ9UjVHAMDlAb4lMcVy7dyHkyPG5Hy" },
+      { title: "Differential Equations", id: "1MSNemI4aQSIsYxKmWScZg_PMY-Q8pfBk" },
+      { title: "Digital Business", id: "1j-3L-ahEh4KyYX2EJUkWx96WS3JnoWtp" },
+      { title: "Java", id: "1qwOAUKrGHG_6E1SnbmZNmvE8jJJFeqqi" },
+      { title: "Psychology", id: "1odLWb-yGzv9CwLnPOMONGJRXKgo0kRoV" },
+      { title: "Tutorial Links", id: "1n7KFuDZrzXVe2NvIL3H35QhiKnhwFF4U" },
+    ],
+  },
+  {
+    name: "L200 — 2nd Semester",
+    icon: BookOpen,
+    url: DRIVE("1-a4UBBLhzSvqAt85GC9Uhzaxs7Dqn110"),
+    courses: [
+      { title: "Business Process Modelling", id: "1Y6eLpaeirDVnMHtDxHYhNH7EOAGCkekX" },
+      { title: "Critical Thinking", id: "10bPgxx7TGzWYdDcllVeSDs_zn2fGDypH" },
+      { title: "Decision Support Systems", id: "1lqU0cIiCe2a6-xIRUfU62tW1ZctpxRe9" },
+      { title: "IoT", id: "1u6ldTNzz_uCSURXXmPibdSDeO4UQdnEc" },
+      { title: "Organizational Behaviour", id: "1v19lkF7b1TRWJpyaP_VzK84TA4pOG9td" },
+      { title: "System Analysis & Design", id: "194Q-Fpt8fgB7BDdJYZrvQQWySXFScgMc" },
+      { title: "Tutorial Links", id: "1g58cmBGwGwI2TTS-pFpK2D9nBZThTpab" },
+    ],
+  },
+  {
+    name: "L300 — 1st Semester",
     icon: BookOpen,
     url: DRIVE("1B1fLr2_KhgU1KqZHfqB_6MOWNnzRYaGg"),
     courses: [
@@ -24,7 +53,7 @@ const semesters = [
     ],
   },
   {
-    name: "2nd Semester — L300",
+    name: "L300 — 2nd Semester",
     icon: GraduationCap,
     url: DRIVE("1V11fepusRQ4H2KLkxfa7ISMnM_BREf8Z"),
     courses: [
