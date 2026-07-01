@@ -1,79 +1,42 @@
 import {
-  Code2,
-  BrainCircuit,
-  ShieldCheck,
-  Cloud,
-  LineChart,
-  Briefcase,
+  FolderOpen,
+  BookOpen,
+  GraduationCap,
   ArrowUpRight,
 } from "lucide-react";
 
-const categories = [
+const DRIVE = (id: string) => `https://drive.google.com/drive/folders/${id}`;
+
+const semesters = [
   {
-    name: "Programming",
-    icon: Code2,
-    resources: [
-      { title: "The Odin Project", type: "Course", url: "https://www.theodinproject.com" },
-      { title: "freeCodeCamp", type: "Course", url: "https://www.freecodecamp.org" },
-      { title: "CS50 by Harvard", type: "Course", url: "https://cs50.harvard.edu" },
+    name: "1st Semester",
+    icon: BookOpen,
+    url: DRIVE("1B1fLr2_KhgU1KqZHfqB_6MOWNnzRYaGg"),
+    courses: [
+      { title: "AI in Engineering", id: "1rrvtBG0nq9KQi-vL4apEEYSp-Ou97HG5" },
+      { title: "Business Intelligence", id: "1VC53ltAwjLzh1R2wpeWcYCekkyw5Suz6" },
+      { title: "Data Structures & Algorithms", id: "1SCyXX53VCTzhjw2iZdStpfl-heJCoovg" },
+      { title: "Environmental Management", id: "13Cs8dMlXKJolxrvEi2PLlg0tYGLTyktT" },
+      { title: "IPM", id: "1atsxKmMVPQQijpVEB6HErHQds5X86sZ-" },
+      { title: "Management Info. Systems", id: "1EMNhnAaJvFz1FuFTUPD4hpd6bdMj5WDZ" },
+      { title: "Operating Systems", id: "11tdzPW0rif_TXdJpenaKnSpyiu_9ScYi" },
+      { title: "Production & Statistics", id: "1yRk-BBVofraqvzhnA6hKpUvrRLbTxlV-" },
     ],
   },
   {
-    name: "AI & Machine Learning",
-    icon: BrainCircuit,
-    resources: [
-      { title: "Fast.ai", type: "Course", url: "https://www.fast.ai" },
-      { title: "DeepLearning.AI", type: "Course", url: "https://www.deeplearning.ai" },
-      { title: "Kaggle Learn", type: "Practice", url: "https://www.kaggle.com/learn" },
-    ],
-  },
-  {
-    name: "Cybersecurity",
-    icon: ShieldCheck,
-    resources: [
-      { title: "TryHackMe", type: "Practice", url: "https://tryhackme.com" },
-      { title: "Hack The Box", type: "Practice", url: "https://www.hackthebox.com" },
-      { title: "OWASP Top 10", type: "Reference", url: "https://owasp.org/Top10" },
-    ],
-  },
-  {
-    name: "Cloud & DevOps",
-    icon: Cloud,
-    resources: [
-      { title: "AWS Free Tier", type: "Platform", url: "https://aws.amazon.com/free" },
-      { title: "Google Cloud Skills Boost", type: "Course", url: "https://cloudskillsboost.google" },
-      { title: "Docker Docs", type: "Reference", url: "https://docs.docker.com" },
-    ],
-  },
-  {
-    name: "Data Science",
-    icon: LineChart,
-    resources: [
-      { title: "Kaggle Datasets", type: "Data", url: "https://www.kaggle.com/datasets" },
-      { title: "Towards Data Science", type: "Articles", url: "https://towardsdatascience.com" },
-      { title: "DataCamp", type: "Course", url: "https://www.datacamp.com" },
-    ],
-  },
-  {
-    name: "Career & Interviews",
-    icon: Briefcase,
-    resources: [
-      { title: "LeetCode", type: "Practice", url: "https://leetcode.com" },
-      { title: "Levels.fyi", type: "Salaries", url: "https://www.levels.fyi" },
-      { title: "LinkedIn Learning", type: "Course", url: "https://www.linkedin.com/learning" },
+    name: "2nd Semester — L300",
+    icon: GraduationCap,
+    url: DRIVE("1V11fepusRQ4H2KLkxfa7ISMnM_BREf8Z"),
+    courses: [
+      { title: "Business Entrepreneurship", id: "1A6_4rZAxvtUh0yNV147NEbU5UPd56TiG" },
+      { title: "Data Science", id: "1coNFDq9lqcCunpDDI6zAPyMgNyxwy5v-" },
+      { title: "Human–Computer Interaction", id: "1qBz-MoofsMfFBtPkCk_YyTgoTDnT1goo" },
+      { title: "Info. & Cybersecurity", id: "156IfC8IfYepj6NjwtlffpOREwJMKvOV-" },
+      { title: "Research Ethics", id: "13RzhdrMxgTVOy7rr3d-wcATRP8ZMyssA" },
+      { title: "Digital Marketing & E-commerce Glossary", id: "1B1XrM6IpQJidLo_PT6nfvtaPPiUnn8Jfbgo7p9acQq8" },
     ],
   },
 ];
-
-const typeColors: Record<string, string> = {
-  Course: "bg-[color:var(--club-blue-deep)]/5 text-[color:var(--club-blue-deep)]",
-  Practice: "bg-green-50 text-green-700",
-  Reference: "bg-violet-50 text-violet-700",
-  Platform: "bg-amber-50 text-amber-700",
-  Data: "bg-sky-50 text-sky-700",
-  Articles: "bg-pink-50 text-pink-700",
-  Salaries: "bg-gray-100 text-gray-600",
-};
 
 export default function ResourcesSection() {
   return (
@@ -83,43 +46,54 @@ export default function ResourcesSection() {
         <p className="is-eyebrow mb-4">Learning Resources</p>
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
           <h2 className="text-4xl sm:text-5xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] leading-[0.95] tracking-tight max-w-lg">
-            Curated resources for every track.
+            Course material, sorted by semester.
           </h2>
           <p className="text-gray-500 text-sm max-w-xs leading-relaxed">
-            Handpicked by our department leads to help you go from beginner to job-ready.
+            Slides, past questions and notes — pulled straight from the IS Club shared Drive.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {categories.map((cat) => {
-            const Icon = cat.icon;
+        <div className="grid md:grid-cols-2 gap-5">
+          {semesters.map((sem) => {
+            const Icon = sem.icon;
             return (
-            <div key={cat.name} className="group border border-gray-100 rounded-2xl p-6 bg-[#F8FAFC] hover:border-[color:var(--club-blue-deep)]/40 hover:shadow-[0_18px_40px_-24px_rgba(15,23,42,0.25)] hover:-translate-y-0.5 transition-all duration-200">
-              <div className="flex items-center gap-3 mb-5 pb-5 border-b border-gray-100">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--club-blue-deep)]/5 text-[color:var(--club-blue-deep)] ring-1 ring-inset ring-[color:var(--club-blue-deep)]/10 group-hover:bg-[color:var(--club-blue-deep)] group-hover:text-white transition-colors">
-                  <Icon size={18} strokeWidth={2} />
-                </span>
-                <span className="font-bold text-gray-950 text-sm">{cat.name}</span>
-              </div>
-              <ul className="space-y-3">
-                {cat.resources.map((r) => (
-                  <li key={r.title} className="flex items-center justify-between gap-2">
-                    <a
-                      href={r.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-gray-700 hover:text-[color:var(--club-blue-deep)] transition truncate inline-flex items-center gap-1.5 group/link"
-                    >
-                      {r.title}
-                      <ArrowUpRight size={12} className="opacity-0 group-hover/link:opacity-100 transition" />
-                    </a>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full flex-shrink-0 ${typeColors[r.type] ?? "bg-gray-100 text-gray-600"}`}>
-                      {r.type}
+              <div key={sem.name} className="group border border-gray-100 rounded-2xl p-6 bg-[#F8FAFC] hover:border-[color:var(--club-blue-deep)]/40 hover:shadow-[0_18px_40px_-24px_rgba(15,23,42,0.25)] hover:-translate-y-0.5 transition-all duration-200">
+                <div className="flex items-center justify-between gap-3 mb-5 pb-5 border-b border-gray-100">
+                  <div className="flex items-center gap-3">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--club-blue-deep)]/5 text-[color:var(--club-blue-deep)] ring-1 ring-inset ring-[color:var(--club-blue-deep)]/10 group-hover:bg-[color:var(--club-blue-deep)] group-hover:text-white transition-colors">
+                      <Icon size={18} strokeWidth={2} />
                     </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                    <div>
+                      <div className="font-bold text-gray-950 text-sm">{sem.name}</div>
+                      <div className="text-[11px] text-gray-500">{sem.courses.length} courses</div>
+                    </div>
+                  </div>
+                  <a
+                    href={sem.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] font-bold text-[color:var(--club-blue-deep)] hover:underline"
+                  >
+                    Open <ArrowUpRight size={12} />
+                  </a>
+                </div>
+                <ul className="grid sm:grid-cols-2 gap-2">
+                  {sem.courses.map((c) => (
+                    <li key={c.id}>
+                      <a
+                        href={DRIVE(c.id)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 rounded-lg border border-gray-100 bg-white px-3 py-2 text-sm text-gray-700 hover:border-[color:var(--club-blue-deep)]/40 hover:text-[color:var(--club-blue-deep)] transition group/link"
+                      >
+                        <FolderOpen size={14} className="text-[color:var(--club-lime)] flex-shrink-0" />
+                        <span className="truncate flex-1">{c.title}</span>
+                        <ArrowUpRight size={12} className="opacity-0 group-hover/link:opacity-100 transition flex-shrink-0" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             );
           })}
         </div>
