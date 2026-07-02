@@ -79,7 +79,7 @@ const departments = [
 
 export default function DepartmentsSection() {
   return (
-    <section id="departments" className="bg-[#F8FAFC] py-24 px-5 sm:px-8">
+    <section id="departments" className="bg-[#F8FAFC] py-16 sm:py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
         <p className="is-eyebrow mb-4">Departments</p>

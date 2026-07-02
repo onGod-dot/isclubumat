@@ -41,7 +41,7 @@ export default function MembershipSection() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <section id="membership" className="bg-[#F8FAFC] border-t border-gray-100 py-24 px-5 sm:px-8">
+    <section id="membership" className="bg-[#F8FAFC] border-t border-gray-100 py-16 sm:py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
         <p className="is-eyebrow mb-4">Membership</p>

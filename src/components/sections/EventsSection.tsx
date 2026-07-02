@@ -58,7 +58,7 @@ export default function EventsSection() {
     <section
       id="events"
       ref={sectionRef}
-      className="min-h-screen flex flex-col justify-center bg-[color:var(--club-blue-deep)] text-white border-t border-white/10 py-24"
+      className="md:min-h-screen flex flex-col justify-center bg-[color:var(--club-blue-deep)] text-white border-t border-white/10 py-16 sm:py-24"
     >
       <div className="max-w-7xl mx-auto w-full px-5 sm:px-8">
         <div
@@ -67,14 +67,14 @@ export default function EventsSection() {
             headerVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <p className="is-eyebrow mb-4 !text-[color:var(--club-lime)]">
+          <p className="is-eyebrow mb-4 !text-[color:var(--club-lime)] justify-center flex">
             <span className="mr-2 inline-block w-1.5 h-1.5 rounded-full bg-[color:var(--club-lime)]" />
             Events
           </p>
-          <h2 className="font-[Archivo_Black] uppercase text-5xl sm:text-6xl lg:text-7xl leading-[0.9] tracking-tight">
+          <h2 className="font-[Archivo_Black] uppercase text-4xl sm:text-6xl lg:text-7xl leading-[0.9] tracking-tight">
             What we've been up to.
           </h2>
-          <p className="mt-5 text-white/60 max-w-xl mx-auto text-base sm:text-lg">
+          <p className="mt-4 sm:mt-5 text-white/60 max-w-xl mx-auto text-sm sm:text-lg px-2">
             Scroll through hackathons, community events and programmes hosted by IS Club UMaT.
           </p>
         </div>
@@ -86,17 +86,17 @@ export default function EventsSection() {
           gridVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >
-        <div className="-mx-6 px-6 md:mx-0 md:px-0">
+        <div className="px-5 sm:px-6 md:mx-0 md:px-0">
           <div
             ref={scrollerRef}
-            className="flex flex-col md:flex-row gap-6 md:gap-8 md:overflow-x-auto scrollbar-hide md:px-[max(2rem,calc((100vw-1200px)/2))] md:pb-10"
+            className="flex flex-col md:flex-row gap-5 md:gap-8 md:overflow-x-auto scrollbar-hide md:px-[max(2rem,calc((100vw-1200px)/2))] md:pb-10"
             style={{ scrollSnapType: "x mandatory" }}
           >
             {events.map((ev, i) => (
               <a
                 key={ev.id}
                 href="#events"
-                className="group relative flex-shrink-0 w-full md:w-[650px] aspect-[16/10] rounded-2xl overflow-hidden bg-black/40 shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition-all duration-500"
+                className="group relative flex-shrink-0 w-full aspect-[4/5] md:aspect-[16/10] md:w-[650px] rounded-2xl overflow-hidden bg-black/40 shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition-all duration-500"
                 style={{
                   scrollSnapAlign: "center",
                   transitionDelay: gridVisible ? `${i * 100}ms` : "0ms",
@@ -109,19 +109,19 @@ export default function EventsSection() {
                   alt={ev.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/10 md:via-black/20 md:to-transparent" />
 
-                <div className="absolute top-5 left-5 flex items-center gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full bg-[color:var(--club-lime)] text-[color:var(--club-blue-deep)]">
+                <div className="absolute top-4 left-4 sm:top-5 sm:left-5 flex items-center gap-2">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-[color:var(--club-lime)] text-[color:var(--club-blue-deep)]">
                     {ev.category}
                   </span>
                 </div>
 
-                <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8 transition-all duration-500 md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0">
-                  <h3 className="font-[Archivo_Black] uppercase text-2xl sm:text-3xl leading-tight mb-3">
+                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8 transition-all duration-500 md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0">
+                  <h3 className="font-[Archivo_Black] uppercase text-xl sm:text-3xl leading-tight mb-2 sm:mb-3">
                     {ev.title}
                   </h3>
-                  <div className="flex flex-wrap items-center gap-4 text-xs text-white/80 mb-5">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] sm:text-xs text-white/85 mb-4 sm:mb-5">
                     <span className="inline-flex items-center gap-1.5">
                       <CalendarDays size={13} className="text-[color:var(--club-lime)]" />
                       {ev.date}
@@ -131,7 +131,7 @@ export default function EventsSection() {
                       {ev.venue}
                     </span>
                   </div>
-                  <span className="inline-flex items-center gap-2 text-sm font-semibold bg-white text-[color:var(--club-blue-deep)] px-4 py-2 rounded-full">
+                  <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold bg-white text-[color:var(--club-blue-deep)] px-3.5 sm:px-4 py-2 rounded-full">
                     View Event <ArrowUpRight size={14} />
                   </span>
                 </div>
