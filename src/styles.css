@@ -221,3 +221,14 @@
 @media (min-width: 640px)  { .fan-card { width: 5rem; border-radius: 0.875rem; } }
 @media (min-width: 768px)  { .fan-card { width: 5.5rem; } }
 @media (min-width: 1024px) { .fan-card { width: 6rem; border-radius: 1rem; } }
+
+/* ── Blue button hover → lime green ─────────────────────────── */
+.btn-blue {
+  background-color: var(--club-blue-deep);
+  color: #fff;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+.btn-blue:hover {
+  background-color: var(--club-lime);
+  color: var(--club-blue-deep);
+}

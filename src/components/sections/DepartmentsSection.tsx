@@ -71,7 +71,7 @@ const departments = [
     name: "Entrepreneurship",
     lead: "TBA",
     icon: Rocket,
-    desc: "Turn ideas into ventures — business modelling, pitching, funding, and startup fundamentals.",
+    desc: "Turn ideas into ventures business modelling, pitching, funding, and startup fundamentals.",
     skills: ["Business Model Canvas", "Lean Startup", "Pitch Deck", "MVP"],
     projects: ["Startup Weekend", "Idea Competition"],
   },

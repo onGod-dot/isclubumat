@@ -6,8 +6,8 @@ import logoUrl from "@/assets/is-club-logo.jpeg";
 export const Route = createFileRoute("/resources")({
   head: () => ({
     meta: [
-      { title: "Learning Resources — IS Club UMAT" },
-      { name: "description", content: "Course materials, past questions, and notes — IS Club UMAT." },
+      { title: "Learning Resources IS Club UMAT" },
+      { name: "description", content: "Course materials, past questions, and notes IS Club UMAT." },
     ],
   }),
   component: ResourcesPage,
@@ -52,13 +52,13 @@ function ResourcesPage() {
             Course<br />Materials
           </h1>
           <p className="text-white/60 text-base max-w-lg leading-relaxed">
-            Every semester's slides, past questions, and notes — sourced from the IS Club Google Drive.
+            Every semester's slides, past questions, and notes sourced from the IS Club Google Drive.
             Click any folder to open it directly.
           </p>
         </div>
       </div>
 
-      {/* All semesters — each as a group with 4-column folder grid */}
+      {/* All semesters each as a group with 4-column folder grid */}
       <main className="px-5 sm:px-8 py-16">
         <div className="max-w-7xl mx-auto space-y-14">
           {semesters.map((sem) => (

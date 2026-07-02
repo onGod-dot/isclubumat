@@ -63,7 +63,9 @@ function Index() {
             ))}
           </ul>
           <a
-            href="#join"
+            href="https://chat.whatsapp.com/FZ2wqRPis1EDtbNzd0SkiD?mode=gi_t"
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full border border-white/60 px-5 py-2.5 text-sm font-medium text-white hover:bg-white hover:text-[color:var(--club-blue-deep)] transition"
           >
             Join the club

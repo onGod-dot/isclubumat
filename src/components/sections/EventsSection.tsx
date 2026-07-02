@@ -116,7 +116,7 @@ export default function EventsSection() {
               </div>
               <a
                 href="#"
-                className="mt-1 text-center rounded-xl py-2.5 text-sm font-semibold bg-gray-950 text-white hover:bg-[color:var(--club-blue-deep)] transition-colors duration-150"
+                className="mt-1 text-center rounded-xl py-2.5 text-sm font-semibold btn-blue"
               >
                 Register
               </a>

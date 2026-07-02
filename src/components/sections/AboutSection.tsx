@@ -7,12 +7,12 @@ export default function AboutSection() {
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
 
-          {/* Left — heading */}
+          {/* Left heading */}
           <h2 className="text-4xl sm:text-5xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] leading-[0.95] tracking-tight">
             Who we are &amp;<br />what we stand for.
           </h2>
 
-          {/* Right — body text */}
+          {/* Right body text */}
           <div className="space-y-4 text-gray-500 text-base leading-relaxed">
             <p>
               IS Club UMAT is the Information Systems &amp; Technology Club at the University of Mines and

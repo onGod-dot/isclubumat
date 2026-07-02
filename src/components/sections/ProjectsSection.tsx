@@ -23,7 +23,7 @@ const projects = [
   },
   {
     title: "Student Event Portal",
-    desc: "Web platform for managing club events — registration, attendance, and feedback.",
+    desc: "Web platform for managing club events registration, attendance, and feedback.",
     stack: ["Next.js", "Supabase", "Tailwind"],
     category: "Web",
     status: "In Progress",

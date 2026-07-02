@@ -10,7 +10,7 @@ const DRIVE = (id: string) => `https://drive.google.com/drive/folders/${id}`;
 
 export const semesters = [
   {
-    name: "L100 — 1st Semester",
+    name: "L100 1st Semester",
     icon: BookOpen,
     url: DRIVE("1-4zpEgxG_2r5V7D4rCUmNTYrDsG-Maor"),
     courses: [
@@ -22,7 +22,7 @@ export const semesters = [
     ],
   },
   {
-    name: "L100 — 2nd Semester",
+    name: "L100 2nd Semester",
     icon: BookOpen,
     url: DRIVE("1-IXigTE7wnv83xFdUkB02V9y6spd0qDV"),
     courses: [
@@ -34,7 +34,7 @@ export const semesters = [
     ],
   },
   {
-    name: "L200 — 1st Semester",
+    name: "L200 1st Semester",
     icon: BookOpen,
     url: DRIVE("1-VszIbP8ile8a4V5KpFjU_0Et6LoPwSe"),
     courses: [
@@ -49,7 +49,7 @@ export const semesters = [
     ],
   },
   {
-    name: "L200 — 2nd Semester",
+    name: "L200 2nd Semester",
     icon: BookOpen,
     url: DRIVE("1-a4UBBLhzSvqAt85GC9Uhzaxs7Dqn110"),
     courses: [
@@ -63,7 +63,7 @@ export const semesters = [
     ],
   },
   {
-    name: "L300 — 1st Semester",
+    name: "L300 1st Semester",
     icon: BookOpen,
     url: DRIVE("1B1fLr2_KhgU1KqZHfqB_6MOWNnzRYaGg"),
     courses: [
@@ -78,7 +78,7 @@ export const semesters = [
     ],
   },
   {
-    name: "L300 — 2nd Semester",
+    name: "L300 2nd Semester",
     icon: GraduationCap,
     url: DRIVE("1V11fepusRQ4H2KLkxfa7ISMnM_BREf8Z"),
     courses: [
@@ -148,7 +148,7 @@ export default function ResourcesSection() {
             Course material, sorted by semester.
           </h2>
           <p className="text-gray-500 text-sm max-w-xs leading-relaxed">
-            Slides, past questions and notes — pulled straight from the IS Club shared Drive.
+            Slides, past questions and notes pulled straight from the IS Club shared Drive.
           </p>
         </div>
 
@@ -156,13 +156,12 @@ export default function ResourcesSection() {
           {preview.map((sem) => <SemesterCard key={sem.name} sem={sem} />)}
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-end">
           <Link
             to="/resources"
-            className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white transition-colors hover:opacity-90"
-            style={{ backgroundColor: "var(--club-blue-deep)" }}
+            className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold btn-blue"
           >
-            View all resources
+            View all
             <ArrowUpRight size={15} />
           </Link>
         </div>

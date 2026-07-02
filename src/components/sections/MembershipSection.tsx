@@ -144,7 +144,7 @@ export default function MembershipSection() {
               </div>
               <button
                 type="submit"
-                className="w-full rounded-xl py-3 text-sm font-bold text-white bg-[color:var(--club-blue-deep)] hover:bg-black transition-colors duration-150"
+                className="w-full rounded-xl py-3 text-sm font-bold btn-blue"
               >
                 Submit Application
               </button>
