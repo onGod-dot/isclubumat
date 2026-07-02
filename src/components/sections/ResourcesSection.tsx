@@ -139,7 +139,7 @@ export default function ResourcesSection() {
   const preview = semesters.slice(0, 3);
 
   return (
-    <section id="resources" className="bg-white border-t border-gray-100 py-24 px-5 sm:px-8">
+    <section id="resources" className="bg-white border-t border-gray-100 py-16 sm:py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
         <p className="is-eyebrow mb-4">Learning Resources</p>

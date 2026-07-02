@@ -1,6 +1,6 @@
 export default function AboutSection() {
   return (
-    <section id="about" className="bg-white border-t border-gray-100 py-24 px-5 sm:px-8">
+    <section id="about" className="bg-white border-t border-gray-100 py-16 sm:py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
         <p className="is-eyebrow mb-6">About IS Club</p>
