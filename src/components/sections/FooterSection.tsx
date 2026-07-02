@@ -15,7 +15,7 @@ const links = {
 
 export default function FooterSection() {
   return (
-    <footer className="bg-gray-950 text-white px-5 sm:px-8 pt-16 pb-8">
+    <footer className="bg-gray-950 text-white px-5 sm:px-8 pt-14 sm:pt-16 pb-8">
       <div className="max-w-6xl mx-auto">
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12 pb-12 border-b border-white/10">

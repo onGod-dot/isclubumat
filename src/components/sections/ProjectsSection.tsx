@@ -72,7 +72,7 @@ const statusColors: Record<string, string> = {
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="bg-white border-t border-gray-100 py-24 px-5 sm:px-8">
+    <section id="projects" className="bg-white border-t border-gray-100 py-16 sm:py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
         <p className="is-eyebrow mb-4">Projects</p>
