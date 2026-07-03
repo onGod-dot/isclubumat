@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Folder } from "lucide-react";
+import { ArrowLeft, FolderOpen, ExternalLink } from "lucide-react";
 import { semesters } from "@/components/sections/ResourcesSection";
 import logoUrl from "@/assets/is-club-logo.jpeg";
 
