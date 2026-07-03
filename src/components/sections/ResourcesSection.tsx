@@ -3,6 +3,7 @@ import {
   BookOpen,
   GraduationCap,
   ArrowUpRight,
+  ExternalLink,
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
