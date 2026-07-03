@@ -1,4 +1,5 @@
-import { Clock, MapPin, CalendarDays } from "lucide-react";
+import { useRef } from "react";
+import { Clock, MapPin, CalendarDays, ChevronLeft, ChevronRight } from "lucide-react";
 
 const events = [
   {
@@ -8,7 +9,6 @@ const events = [
     time: "8:00 AM",
     venue: "UMaT ICT Lab",
     desc: "48 hours of building. Teams compete to solve real industry problems using technology.",
-    status: "upcoming",
   },
   {
     title: "Capture the Flag",
@@ -17,7 +17,6 @@ const events = [
     time: "10:00 AM",
     venue: "Online & On-campus",
     desc: "Test your cybersecurity skills in our annual CTF challenge open to all UMaT students.",
-    status: "upcoming",
   },
   {
     title: "Tech Talk: AI in Africa",
@@ -26,7 +25,6 @@ const events = [
     time: "2:00 PM",
     venue: "Main Auditorium",
     desc: "Industry experts share how artificial intelligence is being applied across sectors in Africa.",
-    status: "upcoming",
   },
   {
     title: "UI/UX Design Bootcamp",
@@ -35,7 +33,6 @@ const events = [
     time: "9:00 AM",
     venue: "UMaT Design Studio",
     desc: "A three-day hands-on bootcamp covering Figma, design systems, and user research.",
-    status: "upcoming",
   },
   {
     title: "Games Night",
@@ -44,7 +41,6 @@ const events = [
     time: "6:00 PM",
     venue: "Student Centre",
     desc: "Casual evening of tech trivia, game dev showcases, and networking with fellow members.",
-    status: "upcoming",
   },
   {
     title: "Career Session: Big Tech",
@@ -53,7 +49,6 @@ const events = [
     time: "1:00 PM",
     venue: "Lecture Hall B",
     desc: "Alumni working at top tech companies share their journeys, tips, and opportunities.",
-    status: "upcoming",
   },
 ];
 
@@ -67,28 +62,54 @@ const typeColors: Record<string, string> = {
 };
 
 export default function EventsSection() {
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (dir: "left" | "right") => {
+    if (!sliderRef.current) return;
+    const card = sliderRef.current.querySelector<HTMLElement>(".event-card");
+    const gap = 20;
+    const amount = card ? card.offsetWidth + gap : 340;
+    sliderRef.current.scrollBy({ left: dir === "right" ? amount : -amount, behavior: "smooth" });
+  };
+
   return (
     <section id="events" className="bg-[#F8FAFC] border-t border-gray-100 py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
         <p className="is-eyebrow mb-4">Events</p>
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
           <h2 className="text-4xl sm:text-5xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] leading-[0.95] tracking-tight max-w-lg">
             Upcoming events &amp; activities.
           </h2>
-          <a
-            href="#"
-            className="text-sm font-semibold text-[color:var(--club-blue-deep)] hover:text-black transition whitespace-nowrap"
-          >
-            View full calendar →
-          </a>
+          {/* Slider controls */}
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={() => scroll("left")}
+              className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-gray-200 bg-white text-gray-600 hover:border-[color:var(--club-blue-deep)] hover:text-[color:var(--club-blue-deep)] transition"
+              aria-label="Previous"
+            >
+              <ChevronLeft size={16} />
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-gray-200 bg-white text-gray-600 hover:border-[color:var(--club-blue-deep)] hover:text-[color:var(--club-blue-deep)] transition"
+              aria-label="Next"
+            >
+              <ChevronRight size={16} />
+            </button>
+          </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Slider */}
+        <div
+          ref={sliderRef}
+          className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
           {events.map((e) => (
             <div
               key={e.title}
-              className="border border-gray-100 rounded-2xl p-6 flex flex-col gap-4 hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200 bg-white"
+              className="event-card flex-none w-[calc((100%-2*20px)/3)] min-w-[280px] snap-start border border-gray-100 rounded-2xl p-6 flex flex-col gap-4 hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200 bg-white"
             >
               <div className="flex items-center justify-between">
                 <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${typeColors[e.type] ?? "bg-gray-100 text-gray-600"}`}>
@@ -114,10 +135,7 @@ export default function EventsSection() {
                   <span>{e.venue}</span>
                 </div>
               </div>
-              <a
-                href="#"
-                className="mt-1 text-center rounded-xl py-2.5 text-sm font-semibold btn-blue"
-              >
+              <a href="#" className="mt-1 text-center rounded-xl py-2.5 text-sm font-semibold btn-blue">
                 Register
               </a>
             </div>

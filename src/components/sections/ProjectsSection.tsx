@@ -1,4 +1,5 @@
-import { Github, ExternalLink, Users } from "lucide-react";
+import { useRef } from "react";
+import { Github, ExternalLink, Users, ChevronLeft, ChevronRight } from "lucide-react";
 
 const projects = [
   {
@@ -71,25 +72,54 @@ const statusColors: Record<string, string> = {
 };
 
 export default function ProjectsSection() {
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (dir: "left" | "right") => {
+    if (!sliderRef.current) return;
+    const card = sliderRef.current.querySelector<HTMLElement>(".project-card");
+    const gap = 20;
+    const amount = card ? card.offsetWidth + gap : 340;
+    sliderRef.current.scrollBy({ left: dir === "right" ? amount : -amount, behavior: "smooth" });
+  };
+
   return (
     <section id="projects" className="bg-white border-t border-gray-100 py-16 sm:py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
         <p className="is-eyebrow mb-4">Projects</p>
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
           <h2 className="text-4xl sm:text-5xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] leading-[0.95] tracking-tight max-w-lg">
             Things we've built.
           </h2>
-          <a href="#" className="text-sm font-semibold text-[color:var(--club-blue-deep)] hover:text-black transition whitespace-nowrap">
-            View all projects →
-          </a>
+          {/* Slider controls */}
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={() => scroll("left")}
+              className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-gray-200 bg-white text-gray-600 hover:border-[color:var(--club-blue-deep)] hover:text-[color:var(--club-blue-deep)] transition"
+              aria-label="Previous"
+            >
+              <ChevronLeft size={16} />
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-gray-200 bg-white text-gray-600 hover:border-[color:var(--club-blue-deep)] hover:text-[color:var(--club-blue-deep)] transition"
+              aria-label="Next"
+            >
+              <ChevronRight size={16} />
+            </button>
+          </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* Slider */}
+        <div
+          ref={sliderRef}
+          className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
           {projects.map((p) => (
             <div
               key={p.title}
-              className="bg-[#F8FAFC] border border-gray-100 rounded-2xl p-6 flex flex-col gap-4 hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200"
+              className="project-card flex-none w-[calc((100%-2*20px)/3)] min-w-[280px] snap-start bg-[#F8FAFC] border border-gray-100 rounded-2xl p-6 flex flex-col gap-4 hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200"
             >
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[color:var(--club-blue-deep)]/5 text-[color:var(--club-blue-deep)]">

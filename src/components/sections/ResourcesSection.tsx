@@ -93,6 +93,50 @@ export const semesters = [
   },
 ];
 
+// Homepage preview card — lime green FolderOpen icons, simpler layout
+export function SemesterCardPreview({ sem }: { sem: typeof semesters[0] }) {
+  const Icon = sem.icon;
+  return (
+    <div className="group border border-gray-100 rounded-2xl p-6 bg-[#F8FAFC] hover:border-[color:var(--club-blue-deep)]/40 hover:shadow-[0_18px_40px_-24px_rgba(15,23,42,0.25)] hover:-translate-y-0.5 transition-all duration-200">
+      <div className="flex items-center justify-between gap-3 mb-5 pb-5 border-b border-gray-100">
+        <div className="flex items-center gap-3">
+          <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--club-blue-deep)]/5 text-[color:var(--club-blue-deep)] ring-1 ring-inset ring-[color:var(--club-blue-deep)]/10 group-hover:bg-[color:var(--club-blue-deep)] group-hover:text-white transition-colors">
+            <Icon size={18} strokeWidth={2} />
+          </span>
+          <div>
+            <div className="font-bold text-gray-950 text-sm">{sem.name}</div>
+            <div className="text-[11px] text-gray-500">{sem.courses.length} courses</div>
+          </div>
+        </div>
+        <a
+          href={sem.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-[11px] font-bold text-[color:var(--club-blue-deep)] hover:underline"
+        >
+          Open <ArrowUpRight size={12} />
+        </a>
+      </div>
+      <ul className="grid sm:grid-cols-2 gap-2">
+        {sem.courses.map((c) => (
+          <li key={c.id}>
+            <a
+              href={DRIVE(c.id)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-lg border border-gray-100 bg-white px-3 py-2 text-sm text-gray-700 hover:border-[color:var(--club-blue-deep)]/40 hover:text-[color:var(--club-blue-deep)] transition group/link"
+            >
+              <FolderOpen size={14} className="flex-shrink-0" style={{ color: "var(--club-lime)" }} />
+              <span className="truncate flex-1">{c.title}</span>
+              <ArrowUpRight size={12} className="opacity-0 group-hover/link:opacity-100 transition flex-shrink-0" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export function SemesterCard({ sem }: { sem: typeof semesters[0] }) {
   const Icon = sem.icon;
   return (
@@ -159,7 +203,7 @@ export default function ResourcesSection() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-5 mb-8">
-          {preview.map((sem) => <SemesterCard key={sem.name} sem={sem} />)}
+          {preview.map((sem) => <SemesterCardPreview key={sem.name} sem={sem} />)}
         </div>
 
         <div className="flex justify-end">
