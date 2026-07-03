@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Folder } from "lucide-react";
+import { ArrowLeft, FolderOpen, ExternalLink } from "lucide-react";
 import { semesters } from "@/components/sections/ResourcesSection";
 import logoUrl from "@/assets/is-club-logo.jpeg";
 
@@ -85,23 +85,24 @@ function ResourcesPage() {
                 </a>
               </div>
 
-              {/* 4-column folder grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              {/* Folder icon cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {sem.courses.map((course) => (
                   <a
                     key={course.id}
                     href={DRIVE(course.id)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-3 rounded-xl border border-gray-100 bg-[#F8FAFC] px-4 py-3 hover:border-[color:var(--club-blue-deep)]/30 hover:bg-white hover:-translate-y-0.5 transition-all duration-150"
+                    className="group flex flex-col items-center text-center rounded-xl border border-gray-100 bg-[#F8FAFC] p-5 hover:border-[color:var(--club-blue-deep)]/30 hover:bg-white hover:shadow-[0_10px_30px_-20px_rgba(15,23,42,0.2)] hover:-translate-y-0.5 transition-all duration-200"
                   >
-                    <Folder
-                      size={18}
-                      className="flex-shrink-0 transition-colors group-hover:text-[color:var(--club-blue-deep)]"
-                      style={{ color: "var(--club-lime)" }}
-                    />
-                    <span className="text-sm text-gray-700 group-hover:text-[color:var(--club-blue-deep)] transition-colors truncate">
+                    <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[color:var(--club-blue-deep)]/5 text-[color:var(--club-blue-deep)] mb-3 group-hover:bg-[color:var(--club-blue-deep)] group-hover:text-white transition-colors">
+                      <FolderOpen size={28} strokeWidth={1.8} />
+                    </span>
+                    <span className="text-sm font-semibold text-gray-800 group-hover:text-[color:var(--club-blue-deep)] transition-colors leading-tight">
                       {course.title}
+                    </span>
+                    <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-medium text-gray-400 group-hover:text-[color:var(--club-blue-deep)] transition-colors">
+                      Open <ExternalLink size={10} />
                     </span>
                   </a>
                 ))}
