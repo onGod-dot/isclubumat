@@ -116,22 +116,27 @@ export function SemesterCard({ sem }: { sem: typeof semesters[0] }) {
           Open <ArrowUpRight size={12} />
         </a>
       </div>
-      <ul className="grid sm:grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {sem.courses.map((c) => (
-          <li key={c.id}>
-            <a
-              href={DRIVE(c.id)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-lg border border-gray-100 bg-white px-3 py-2 text-sm text-gray-700 hover:border-[color:var(--club-blue-deep)]/40 hover:text-[color:var(--club-blue-deep)] transition group/link"
-            >
-              <FolderOpen size={14} className="text-[color:var(--club-lime)] flex-shrink-0" />
-              <span className="truncate flex-1">{c.title}</span>
-              <ArrowUpRight size={12} className="opacity-0 group-hover/link:opacity-100 transition flex-shrink-0" />
-            </a>
-          </li>
+          <a
+            key={c.id}
+            href={DRIVE(c.id)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-col items-center text-center rounded-xl border border-gray-100 bg-white p-5 hover:border-[color:var(--club-blue-deep)]/30 hover:shadow-[0_10px_30px_-20px_rgba(15,23,42,0.2)] hover:-translate-y-0.5 transition-all duration-200"
+          >
+            <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[color:var(--club-blue-deep)]/5 text-[color:var(--club-blue-deep)] mb-3 group-hover:bg-[color:var(--club-blue-deep)] group-hover:text-white transition-colors">
+              <FolderOpen size={24} strokeWidth={1.8} />
+            </span>
+            <span className="text-sm font-semibold text-gray-800 group-hover:text-[color:var(--club-blue-deep)] transition-colors leading-tight">
+              {c.title}
+            </span>
+            <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-medium text-gray-400 group-hover:text-[color:var(--club-blue-deep)] transition-colors">
+              Open <ExternalLink size={10} />
+            </span>
+          </a>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
