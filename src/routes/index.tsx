@@ -29,7 +29,7 @@ function Index() {
 
       {/* ── HERO SECTION ── */}
       <section
-        className="relative overflow-hidden rounded-[40px] px-5 pt-5 pb-12 sm:px-8 sm:pt-6"
+        className="relative overflow-hidden rounded-[40px] px-5 pt-5 pb-4 sm:pb-12 sm:px-8 sm:pt-6"
         style={{
           backgroundColor: "var(--club-blue)",
           backgroundImage:
@@ -73,10 +73,10 @@ function Index() {
         </nav>
 
         {/* HEADLINE */}
-        <div className="relative mt-10 sm:mt-14 pb-8">
+        <div className="relative mt-6 sm:mt-14 pb-2 sm:pb-8">
           <h1
             className="relative z-10 font-[Archivo_Black] text-white text-center leading-[0.85] tracking-tight uppercase break-words"
-            style={{ fontSize: "clamp(2.25rem, 10vw, 8.5rem)" }}
+            style={{ fontSize: "clamp(3.8rem, 22vw, 8.5rem)" }}
           >
             <span className="block">
               <span style={{ color: "var(--club-lime)" }}>#</span>
