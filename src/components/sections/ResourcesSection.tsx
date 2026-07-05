@@ -202,7 +202,7 @@ export default function ResourcesSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5 mb-8">
+        <div className="grid grid-cols-1 gap-5 mb-8">
           {preview.map((sem) => <SemesterCardPreview key={sem.name} sem={sem} />)}
         </div>
 
