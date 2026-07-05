@@ -81,7 +81,7 @@ function Index() {
         <div className="relative mt-6 sm:mt-10 lg:mt-16 pb-2 sm:pb-6 lg:pb-10">
           <h1
             className="relative z-10 font-[Archivo_Black] text-white text-center leading-[0.88] tracking-tight uppercase"
-            style={{ fontSize: "clamp(2rem, 11vw, 9rem)" }}
+            style={{ fontSize: "clamp(1.6rem, 7.5vw, 9rem)" }}
           >
             <span className="block">
               <span style={{ color: "var(--club-lime)" }}>#</span>
