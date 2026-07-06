@@ -4,6 +4,7 @@ import {
   GraduationCap,
   ArrowUpRight,
   ExternalLink,
+  Map,
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
@@ -189,6 +190,43 @@ export function SemesterCard({ sem }: { sem: typeof semesters[0] }) {
   );
 }
 
+// Preview roadmap tracks for the homepage
+const roadmapPreview = [
+  {
+    category: "Software Development",
+    accent: "var(--club-blue-deep)",
+    roads: [
+      { title: "Frontend Developer", url: "https://roadmap.sh/frontend" },
+      { title: "Backend Developer", url: "https://roadmap.sh/backend" },
+      { title: "Full Stack", url: "https://roadmap.sh/full-stack" },
+      { title: "React", url: "https://roadmap.sh/react" },
+      { title: "Node.js", url: "https://roadmap.sh/nodejs" },
+    ],
+  },
+  {
+    category: "Mobile & AI",
+    accent: "var(--club-blue)",
+    roads: [
+      { title: "Flutter", url: "https://roadmap.sh/flutter" },
+      { title: "React Native", url: "https://roadmap.sh/react-native" },
+      { title: "Android", url: "https://roadmap.sh/android" },
+      { title: "AI & ML Engineer", url: "https://roadmap.sh/ai-data-scientist" },
+      { title: "Data Analyst", url: "https://roadmap.sh/data-analyst" },
+    ],
+  },
+  {
+    category: "Cloud & Security",
+    accent: "#0891b2",
+    roads: [
+      { title: "DevOps", url: "https://roadmap.sh/devops" },
+      { title: "AWS", url: "https://roadmap.sh/aws" },
+      { title: "Cybersecurity", url: "https://roadmap.sh/cyber-security" },
+      { title: "Docker", url: "https://roadmap.sh/docker" },
+      { title: "Kubernetes", url: "https://roadmap.sh/kubernetes" },
+    ],
+  },
+];
+
 export default function ResourcesSection() {
   const preview = semesters.slice(0, 3);
 
@@ -196,8 +234,9 @@ export default function ResourcesSection() {
     <section id="resources" className="bg-white border-t border-gray-100 py-16 sm:py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
 
+        {/* ── Course materials ── */}
         <p className="is-eyebrow mb-4">Learning Resources</p>
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
           <h2 className="text-4xl sm:text-5xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] leading-[0.95] tracking-tight max-w-lg">
             Course material, sorted by semester.
           </h2>
@@ -206,7 +245,7 @@ export default function ResourcesSection() {
           </p>
         </div>
 
-        <div className="flex lg:grid lg:grid-cols-3 gap-5 mb-8 overflow-x-auto pb-4 snap-x snap-mandatory">
+        <div className="flex lg:grid lg:grid-cols-3 gap-5 mb-6 overflow-x-auto pb-4 snap-x snap-mandatory">
           {preview.map((sem) => (
             <div key={sem.name} className="min-w-[300px] snap-start lg:min-w-0">
               <SemesterCardPreview sem={sem} />
@@ -214,7 +253,7 @@ export default function ResourcesSection() {
           ))}
         </div>
 
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex justify-end mb-16">
           <Link
             to="/resources"
             className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold btn-blue"
@@ -222,13 +261,80 @@ export default function ResourcesSection() {
             View all
             <ArrowUpRight size={15} />
           </Link>
-          <Link
-            to="/journey"
-            className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border border-gray-200 text-gray-700 hover:border-[color:var(--club-blue-deep)] hover:text-[color:var(--club-blue-deep)] transition-colors"
-          >
-            Career Roadmaps
-            <ArrowUpRight size={15} />
-          </Link>
+        </div>
+
+        {/* ── Career roadmaps ── */}
+        <div className="border-t border-gray-100 pt-14">
+          <p className="is-eyebrow mb-4">Career Roadmaps</p>
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+            <h2 className="text-4xl sm:text-5xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] leading-[0.95] tracking-tight max-w-lg">
+              Begin your journey.
+            </h2>
+            <p className="text-gray-500 text-sm max-w-xs leading-relaxed">
+              Step-by-step roadmaps for every technology career track, curated from roadmap.sh.
+            </p>
+          </div>
+
+          <div className="flex lg:grid lg:grid-cols-3 gap-5 mb-6 overflow-x-auto pb-4 snap-x snap-mandatory">
+            {roadmapPreview.map((track) => (
+              <div
+                key={track.category}
+                className="min-w-[300px] snap-start lg:min-w-0 group border border-gray-100 rounded-2xl p-6 bg-[#F8FAFC] hover:border-[color:var(--club-blue-deep)]/40 hover:shadow-[0_18px_40px_-24px_rgba(15,23,42,0.25)] hover:-translate-y-0.5 transition-all duration-200"
+              >
+                {/* Card header */}
+                <div className="flex items-center justify-between gap-3 mb-5 pb-5 border-b border-gray-100">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-xl ring-1 ring-inset ring-[color:var(--club-blue-deep)]/10 group-hover:text-white transition-colors"
+                      style={{
+                        backgroundColor: `color-mix(in oklab, ${track.accent} 8%, transparent)`,
+                        color: track.accent,
+                      }}
+                    >
+                      <Map size={18} strokeWidth={2} />
+                    </span>
+                    <div>
+                      <div className="font-bold text-gray-950 text-sm">{track.category}</div>
+                      <div className="text-[11px] text-gray-500">{track.roads.length} roadmaps</div>
+                    </div>
+                  </div>
+                  <Link
+                    to="/journey"
+                    className="inline-flex items-center gap-1 text-[11px] font-bold text-[color:var(--club-blue-deep)] hover:underline"
+                  >
+                    View all <ArrowUpRight size={12} />
+                  </Link>
+                </div>
+
+                {/* Roadmap links */}
+                <ul className="grid sm:grid-cols-2 gap-2">
+                  {track.roads.map((r) => (
+                    <li key={r.title}>
+                      <a
+                        href={r.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 rounded-lg border border-gray-100 bg-white px-3 py-2 text-sm text-gray-700 hover:border-[color:var(--club-blue-deep)]/40 hover:text-[color:var(--club-blue-deep)] transition group/link"
+                      >
+                        <ArrowUpRight size={13} className="flex-shrink-0" style={{ color: track.accent }} />
+                        <span className="truncate flex-1">{r.title}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex justify-end">
+            <Link
+              to="/journey"
+              className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold btn-blue"
+            >
+              View all roadmaps
+              <ArrowUpRight size={15} />
+            </Link>
+          </div>
         </div>
 
       </div>
