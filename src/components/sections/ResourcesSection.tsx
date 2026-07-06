@@ -108,28 +108,32 @@ export function SemesterCardPreview({ sem }: { sem: typeof semesters[0] }) {
             <div className="text-[11px] text-gray-500">{sem.courses.length} courses</div>
           </div>
         </div>
-        <a
-          href={sem.url}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          to="/resources"
           className="inline-flex items-center gap-1 text-[11px] font-bold text-[color:var(--club-blue-deep)] hover:underline"
         >
-          Open <ArrowUpRight size={12} />
-        </a>
+          View all <ArrowUpRight size={12} />
+        </Link>
       </div>
       <ul className="grid sm:grid-cols-2 gap-2">
-        {sem.courses.map((c) => (
-          <li key={c.id}>
-            <a
-              href={DRIVE(c.id)}
-              target="_blank"
-              rel="noopener noreferrer"
+        {/*
+          Mobile: show max 5 courses (sm: breakpoint = 640px, below that is mobile).
+          Desktop (sm+): show all courses.
+          We render all but hide extras on mobile via CSS.
+        */}
+        {sem.courses.map((c, i) => (
+          <li
+            key={c.id}
+            className={i >= 5 ? "hidden sm:list-item" : ""}
+          >
+            <Link
+              to="/resources"
               className="flex items-center gap-2 rounded-lg border border-gray-100 bg-white px-3 py-2 text-sm text-gray-700 hover:border-[color:var(--club-blue-deep)]/40 hover:text-[color:var(--club-blue-deep)] transition group/link"
             >
               <FolderOpen size={14} className="flex-shrink-0" style={{ color: "var(--club-lime)" }} />
               <span className="truncate flex-1">{c.title}</span>
               <ArrowUpRight size={12} className="opacity-0 group-hover/link:opacity-100 transition flex-shrink-0" />
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
