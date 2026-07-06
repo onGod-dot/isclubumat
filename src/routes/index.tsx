@@ -29,7 +29,7 @@ function Index() {
 
       {/* ── HERO SECTION ── */}
       <section
-        className="relative overflow-hidden rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] px-4 pt-4 pb-4 sm:px-8 sm:pt-6 sm:pb-10 lg:pb-14"
+        className="relative overflow-hidden rounded-[28px] sm:rounded-[36px] lg:rounded-[40px] px-4 pt-4 pb-2 sm:px-8 sm:pt-6 sm:pb-10 lg:pb-14"
         style={{
           backgroundColor: "var(--club-blue)",
           backgroundImage:
