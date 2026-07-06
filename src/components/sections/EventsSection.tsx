@@ -175,7 +175,7 @@ export default function EventsSection() {
               key={e.title}
               className="event-card flex-none w-[calc((100%-2*20px)/3)] min-w-[280px] snap-start border border-gray-100 rounded-2xl p-6 flex flex-col gap-4 hover:border-[color:var(--club-blue-deep)]/40 hover:-translate-y-0.5 transition-all duration-200 bg-white"
             >
-              <div className="-mx-6 -mt-6 h-40 rounded-t-2xl overflow-hidden bg-gradient-to-br from-[color:var(--club-blue-deep)]/10 to-[color:var(--club-blue-deep)]/30 flex items-center justify-center">
+              <div className="-mx-6 -mt-6 h-52 rounded-t-2xl overflow-hidden bg-gradient-to-br from-[color:var(--club-blue-deep)]/10 to-[color:var(--club-blue-deep)]/30 flex items-center justify-center">
                 {e.image ? (
                   <img src={e.image} alt={e.title} className="w-full h-full object-cover" loading="lazy" />
                 ) : (
