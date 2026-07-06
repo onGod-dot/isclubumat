@@ -202,8 +202,12 @@ export default function ResourcesSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 mb-8">
-          {preview.map((sem) => <SemesterCardPreview key={sem.name} sem={sem} />)}
+        <div className="flex sm:grid sm:grid-cols-1 gap-5 mb-8 overflow-x-auto pb-4 snap-x snap-mandatory">
+          {preview.map((sem) => (
+            <div key={sem.name} className="min-w-[300px] snap-start sm:min-w-0">
+              <SemesterCardPreview sem={sem} />
+            </div>
+          ))}
         </div>
 
         <div className="flex justify-end">
