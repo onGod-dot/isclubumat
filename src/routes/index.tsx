@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <>
-    <main style={{ backgroundColor: "var(--club-blue-deep)" }} className="min-h-screen w-full p-2 sm:p-4 lg:p-5 font-[Inter]">
+    <main style={{ backgroundColor: "var(--club-blue-deep)" }} className="w-full p-2 sm:p-4 lg:p-5 font-[Inter]">
 
       {/* ── HERO SECTION ── */}
       <section
