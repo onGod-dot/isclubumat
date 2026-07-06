@@ -5,10 +5,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import gamesnight from "@/assets/events/gamesnight.jpeg.asset.json";
-import iip from "@/assets/events/iip.png.asset.json";
-import isClubMothers from "@/assets/events/is-club-mothers.png.asset.json";
-import mothers3 from "@/assets/events/mothers-3.png.asset.json";
+
+const IMGS = {
+  gamesnight: "/events/gamesnight.jpeg",
+  iip: "/events/iip.png",
+  isClubMothers: "/events/is-club-mothers.png",
+  mothers3: "/events/mothers-3.png",
+};
 
 const events = [
   {
@@ -18,7 +21,7 @@ const events = [
     time: "3:00 PM",
     venue: "Student Centre",
     desc: "A special tribute to the mothers of the IS Club community — an afternoon of appreciation and celebration.",
-    image: isClubMothers.url,
+    image: IMGS.isClubMothers,
   },
   {
     title: "Mothers' Day Special",
@@ -27,7 +30,7 @@ const events = [
     time: "5:00 PM",
     venue: "Main Hall",
     desc: "Honoring the strength and love of mothers with performances, gifts, and heartfelt messages.",
-    image: mothers3.url,
+    image: IMGS.mothers3,
   },
   {
     title: "Industrial Internship Program",
@@ -36,7 +39,7 @@ const events = [
     time: "9:00 AM",
     venue: "UMaT ICT Lab",
     desc: "Kick off your industrial attachment with sessions from partner companies and IS Club mentors.",
-    image: iip.url,
+    image: IMGS.iip,
   },
   {
     title: "Annual Hackathon",
@@ -77,7 +80,7 @@ const events = [
     time: "6:00 PM",
     venue: "Student Centre",
     desc: "Casual evening of tech trivia, game dev showcases, and networking with fellow members.",
-    image: gamesnight.url,
+    image: IMGS.gamesnight,
   },
   {
     title: "Career Session: Big Tech",
