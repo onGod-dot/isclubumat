@@ -214,12 +214,19 @@ export default function ResourcesSection() {
           ))}
         </div>
 
-        <div className="flex justify-end">
+        <div className="flex items-center justify-between gap-4">
           <Link
             to="/resources"
             className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold btn-blue"
           >
             View all
+            <ArrowUpRight size={15} />
+          </Link>
+          <Link
+            to="/journey"
+            className="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold border border-gray-200 text-gray-700 hover:border-[color:var(--club-blue-deep)] hover:text-[color:var(--club-blue-deep)] transition-colors"
+          >
+            Career Roadmaps
             <ArrowUpRight size={15} />
           </Link>
         </div>
