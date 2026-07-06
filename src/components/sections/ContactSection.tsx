@@ -1,4 +1,12 @@
+import { useState } from "react";
 import { Mail, Phone, MapPin, Send, Linkedin } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 const contactItems = [
   { label: "Email", value: "informationsystem.club@gmail.com", href: "mailto:informationsystem.club@gmail.com", icon: Mail },
@@ -6,7 +14,6 @@ const contactItems = [
   { label: "Location", value: "University of Mines & Technology, Tarkwa, Ghana", href: "#", icon: MapPin },
 ];
 
-// SVG icons for platforms Lucide doesn't cover
 const TikTokIcon = () => (
   <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.79 1.54V6.78a4.85 4.85 0 0 1-1.02-.09z"/>
@@ -29,7 +36,40 @@ const socials = [
 const inputClass =
   "w-full rounded-xl border border-gray-200 bg-[#F8FAFC] px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[color:var(--club-blue-deep)] focus:border-transparent transition";
 
+function ContactForm() {
+  return (
+    <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-semibold text-gray-500 mb-1.5">Name</label>
+          <input type="text" required placeholder="Your name" className={inputClass} />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-gray-500 mb-1.5">Email</label>
+          <input type="email" required placeholder="your@email.com" className={inputClass} />
+        </div>
+      </div>
+      <div>
+        <label className="block text-xs font-semibold text-gray-500 mb-1.5">Subject</label>
+        <input type="text" required placeholder="e.g. Partnership Enquiry" className={inputClass} />
+      </div>
+      <div>
+        <label className="block text-xs font-semibold text-gray-500 mb-1.5">Message</label>
+        <textarea required rows={5} placeholder="Your message..." className={`${inputClass} resize-none`} />
+      </div>
+      <button
+        type="submit"
+        className="w-full inline-flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold btn-blue"
+      >
+        <Send size={14} /> Send Message
+      </button>
+    </form>
+  );
+}
+
 export default function ContactSection() {
+  const [formOpen, setFormOpen] = useState(false);
+
   return (
     <section id="contact" className="bg-[#F8FAFC] border-t border-gray-100 py-16 sm:py-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
@@ -37,7 +77,7 @@ export default function ContactSection() {
         <p className="is-eyebrow mb-4">Contact</p>
         <div className="grid lg:grid-cols-2 gap-16">
 
-          {/* Left */}
+          {/* Left — contact info + socials */}
           <div>
             <h2 className="text-4xl sm:text-5xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] leading-[0.95] tracking-tight mb-6">
               Get in touch.
@@ -83,45 +123,40 @@ export default function ContactSection() {
                 </a>
               ))}
             </div>
+
+            {/* Mobile only — CTA button */}
+            <button
+              onClick={() => setFormOpen(true)}
+              className="lg:hidden mt-8 w-full inline-flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold btn-blue"
+            >
+              <Send size={14} /> Send us a message
+            </button>
           </div>
 
-          {/* Right — form */}
-          <div className="bg-white border border-gray-100 rounded-2xl p-8">
+          {/* Right — inline form, desktop only */}
+          <div className="hidden lg:block bg-white border border-gray-100 rounded-2xl p-8">
             <h3 className="text-xl font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] tracking-tight mb-1">
               Send us a message
             </h3>
             <p className="text-sm text-gray-400 mb-6">We'll get back to you as soon as possible.</p>
-
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-gray-500 mb-1.5">Name</label>
-                  <input type="text" required placeholder="Your name" className={inputClass} />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-gray-500 mb-1.5">Email</label>
-                  <input type="email" required placeholder="your@email.com" className={inputClass} />
-                </div>
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1.5">Subject</label>
-                <input type="text" required placeholder="e.g. Partnership Enquiry" className={inputClass} />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-500 mb-1.5">Message</label>
-                <textarea required rows={5} placeholder="Your message..." className={`${inputClass} resize-none`} />
-              </div>
-              <button
-                type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold btn-blue"
-              >
-                <Send size={14} /> Send Message
-              </button>
-            </form>
+            <ContactForm />
           </div>
 
         </div>
       </div>
+
+      {/* Mobile dialog */}
+      <Dialog open={formOpen} onOpenChange={setFormOpen}>
+        <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="font-[Archivo_Black] uppercase text-[color:var(--club-blue-deep)] tracking-tight">
+              Send us a message
+            </DialogTitle>
+            <DialogDescription>We'll get back to you as soon as possible.</DialogDescription>
+          </DialogHeader>
+          <ContactForm />
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
