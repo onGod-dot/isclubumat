@@ -310,15 +310,13 @@ export default function ResourcesSection() {
                 <ul className="grid sm:grid-cols-2 gap-2">
                   {track.roads.map((r) => (
                     <li key={r.title}>
-                      <a
-                        href={r.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <Link
+                        to="/journey"
                         className="flex items-center gap-2 rounded-lg border border-gray-100 bg-white px-3 py-2 text-sm text-gray-700 hover:border-[color:var(--club-blue-deep)]/40 hover:text-[color:var(--club-blue-deep)] transition group/link"
                       >
                         <ArrowUpRight size={13} className="flex-shrink-0" style={{ color: track.accent }} />
                         <span className="truncate flex-1">{r.title}</span>
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
