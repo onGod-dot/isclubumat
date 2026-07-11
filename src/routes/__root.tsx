@@ -93,9 +93,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "IS Club UMAT" },
       { property: "og:title", content: "IS Club UMAT — Connecting Minds, Advancing Technology" },
       { property: "og:description", content: "The official Information Systems & Technology Club at the University of Mines and Technology, Tarkwa, Ghana. Join 500+ student innovators in software, AI, cybersecurity, cloud computing, and more." },
-      { property: "og:url", content: "https://isclubumat.vercel.app/" },
+      { property: "og:url", content: "https://www.isclub.site/" },
       { property: "og:locale", content: "en_GH" },
-      { property: "og:image", content: "https://isclubumat.vercel.app/is-club-logo.jpeg" },
+      { property: "og:image", content: "https://www.isclub.site/is-club-logo.jpeg" },
       { property: "og:image:alt", content: "IS Club UMAT Logo" },
 
       // Twitter / X Card
@@ -103,7 +103,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@isclub_umat" },
       { name: "twitter:title", content: "IS Club UMAT — Connecting Minds, Advancing Technology" },
       { name: "twitter:description", content: "The official Information Systems & Technology Club at UMaT, Ghana. 500+ members building real projects in software, AI, cybersecurity and more." },
-      { name: "twitter:image", content: "https://isclubumat.vercel.app/is-club-logo.jpeg" },
+      { name: "twitter:image", content: "https://www.isclub.site/is-club-logo.jpeg" },
 
       // Authorship & attribution
       { name: "generator", content: "Built by Cyril Jerry Baah — Snr Dev Cyril | https://snrdevcyril.vercel.app/" },
@@ -112,7 +112,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/is-club-logo.jpeg", type: "image/jpeg" },
-      { rel: "canonical", href: "https://isclubumat.vercel.app/" },
+      { rel: "canonical", href: "https://www.isclub.site/" },
       { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
