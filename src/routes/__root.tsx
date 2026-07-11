@@ -78,25 +78,42 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "IS CLUB" },
-      { name: "description", content: "CLUB UMAT is your community hub for connection and engagement." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "IS CLUB" },
-      { property: "og:description", content: "CLUB UMAT is your community hub for connection and engagement." },
+
+      // Primary SEO
+      { title: "IS Club UMAT — Information Systems & Technology Club | University of Mines and Technology" },
+      { name: "description", content: "IS Club UMAT is the official Information Systems & Technology Club at the University of Mines and Technology, Tarkwa, Ghana. Connecting student innovators through software development, AI, cybersecurity, data science, cloud computing, UI/UX design, and more." },
+      { name: "keywords", content: "IS Club UMAT, Information Systems Club Ghana, UMaT Technology Club, Tarkwa tech club, student tech community Ghana, software development club, AI club Ghana, cybersecurity club UMaT, data science students Ghana, tech events UMaT, hackathon Ghana, coding club University of Mines and Technology" },
+      { name: "author", content: "IS Club UMAT — Designed & built by Cyril Jerry Baah (Snr Dev Cyril)" },
+      { name: "creator", content: "Cyril Jerry Baah — Snr Dev Cyril — https://snrdevcyril.vercel.app/" },
+      { name: "robots", content: "index, follow" },
+      { name: "theme-color", content: "#1e3a8a" },
+
+      // Open Graph
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "IS CLUB" },
-      { name: "twitter:description", content: "CLUB UMAT is your community hub for connection and engagement." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f4726cdc-fc86-4cfd-b251-0483a741937c/id-preview-6ce79085--5cb0f70e-f266-4aa9-8be7-62d528af5089.lovable.app-1782693225906.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f4726cdc-fc86-4cfd-b251-0483a741937c/id-preview-6ce79085--5cb0f70e-f266-4aa9-8be7-62d528af5089.lovable.app-1782693225906.png" },
+      { property: "og:site_name", content: "IS Club UMAT" },
+      { property: "og:title", content: "IS Club UMAT — Connecting Minds, Advancing Technology" },
+      { property: "og:description", content: "The official Information Systems & Technology Club at the University of Mines and Technology, Tarkwa, Ghana. Join 500+ student innovators in software, AI, cybersecurity, cloud computing, and more." },
+      { property: "og:url", content: "https://isclubumat.vercel.app/" },
+      { property: "og:locale", content: "en_GH" },
+      { property: "og:image", content: "https://isclubumat.vercel.app/is-club-logo.jpeg" },
+      { property: "og:image:alt", content: "IS Club UMAT Logo" },
+
+      // Twitter / X Card
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@isclub_umat" },
+      { name: "twitter:title", content: "IS Club UMAT — Connecting Minds, Advancing Technology" },
+      { name: "twitter:description", content: "The official Information Systems & Technology Club at UMaT, Ghana. 500+ members building real projects in software, AI, cybersecurity and more." },
+      { name: "twitter:image", content: "https://isclubumat.vercel.app/is-club-logo.jpeg" },
+
+      // Authorship & attribution
+      { name: "generator", content: "Built by Cyril Jerry Baah — Snr Dev Cyril | https://snrdevcyril.vercel.app/" },
+      { name: "designer", content: "Cyril Jerry Baah — Snr Dev Cyril" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/is-club-logo.jpeg", type: "image/jpeg" },
+      { rel: "canonical", href: "https://isclubumat.vercel.app/" },
+      { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" },

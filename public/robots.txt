@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://isclubumat.vercel.app/sitemap.xml

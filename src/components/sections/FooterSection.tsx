@@ -61,7 +61,17 @@ export default function FooterSection() {
         {/* Bottom bar */}
         <div className="mt-6 pt-6 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-gray-600">
           <p>© {new Date().getFullYear()} IS Club UMAT. All rights reserved.</p>
-          <p>Designed &amp; built by the IS Club Dev Team</p>
+          <p>
+            Designed &amp; built by{" "}
+            <a
+              href="https://snrdevcyril.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition"
+            >
+              Cyril Jerry Baah — Snr Dev Cyril
+            </a>
+          </p>
         </div>
 
       </div>
