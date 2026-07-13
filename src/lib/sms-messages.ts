@@ -52,3 +52,34 @@ export function contactAdminAlertMessage(input: {
     320,
   );
 }
+
+export function eventRegistrationConfirmationMessage(input: {
+  name: string;
+  eventTitle: string;
+  eventDate: string;
+  eventTime: string;
+  eventVenue: string;
+}): string {
+  const firstName = noHyphens(input.name.trim().split(/\s+/)[0] || "there");
+  return `Hi ${firstName}, you are registered for ${noHyphens(input.eventTitle)} on ${noHyphens(input.eventDate)} at ${noHyphens(input.eventTime)}, ${noHyphens(input.eventVenue)}. See you there. IS Club`;
+}
+
+export function eventRegistrationAdminAlertMessage(input: {
+  name: string;
+  email: string;
+  phone: string;
+  indexNo?: string;
+  notes?: string;
+  eventTitle: string;
+  eventDate: string;
+  eventTime: string;
+  eventVenue: string;
+}): string {
+  const index = input.indexNo ? ` Index: ${noHyphens(input.indexNo)}.` : "";
+  const notes = input.notes ? ` Notes: ${truncate(noHyphens(input.notes), 80)}.` : "";
+
+  return truncate(
+    `IS Club: New event registration for ${noHyphens(input.eventTitle)} on ${noHyphens(input.eventDate)}. Name: ${noHyphens(input.name)}. Phone: ${input.phone}. Email: ${input.email}.${index}${notes}`,
+    320,
+  );
+}

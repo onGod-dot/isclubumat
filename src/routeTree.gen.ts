@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResourcesIndexRouteImport } from './routes/resources/index'
 import { Route as ResourcesFolderIdRouteImport } from './routes/resources/$folderId'
 import { Route as ApiFormsMembershipRouteImport } from './routes/api/forms/membership'
+import { Route as ApiFormsEventRegistrationRouteImport } from './routes/api/forms/event-registration'
 import { Route as ApiFormsContactRouteImport } from './routes/api/forms/contact'
 import { Route as ApiPublicDriveFolderFolderIdRouteImport } from './routes/api/public/drive-folder.$folderId'
 import { Route as ApiPublicDriveFileFileIdRouteImport } from './routes/api/public/drive-file.$fileId'
@@ -49,6 +50,12 @@ const ApiFormsMembershipRoute = ApiFormsMembershipRouteImport.update({
   path: '/api/forms/membership',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiFormsEventRegistrationRoute =
+  ApiFormsEventRegistrationRouteImport.update({
+    id: '/api/forms/event-registration',
+    path: '/api/forms/event-registration',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiFormsContactRoute = ApiFormsContactRouteImport.update({
   id: '/api/forms/contact',
   path: '/api/forms/contact',
@@ -74,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/resources/$folderId': typeof ResourcesFolderIdRoute
   '/resources/': typeof ResourcesIndexRoute
   '/api/forms/contact': typeof ApiFormsContactRoute
+  '/api/forms/event-registration': typeof ApiFormsEventRegistrationRoute
   '/api/forms/membership': typeof ApiFormsMembershipRoute
   '/api/public/drive-file/$fileId': typeof ApiPublicDriveFileFileIdRoute
   '/api/public/drive-folder/$folderId': typeof ApiPublicDriveFolderFolderIdRoute
@@ -84,6 +92,7 @@ export interface FileRoutesByTo {
   '/resources/$folderId': typeof ResourcesFolderIdRoute
   '/resources': typeof ResourcesIndexRoute
   '/api/forms/contact': typeof ApiFormsContactRoute
+  '/api/forms/event-registration': typeof ApiFormsEventRegistrationRoute
   '/api/forms/membership': typeof ApiFormsMembershipRoute
   '/api/public/drive-file/$fileId': typeof ApiPublicDriveFileFileIdRoute
   '/api/public/drive-folder/$folderId': typeof ApiPublicDriveFolderFolderIdRoute
@@ -96,6 +105,7 @@ export interface FileRoutesById {
   '/resources/$folderId': typeof ResourcesFolderIdRoute
   '/resources/': typeof ResourcesIndexRoute
   '/api/forms/contact': typeof ApiFormsContactRoute
+  '/api/forms/event-registration': typeof ApiFormsEventRegistrationRoute
   '/api/forms/membership': typeof ApiFormsMembershipRoute
   '/api/public/drive-file/$fileId': typeof ApiPublicDriveFileFileIdRoute
   '/api/public/drive-folder/$folderId': typeof ApiPublicDriveFolderFolderIdRoute
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/resources/$folderId'
     | '/resources/'
     | '/api/forms/contact'
+    | '/api/forms/event-registration'
     | '/api/forms/membership'
     | '/api/public/drive-file/$fileId'
     | '/api/public/drive-folder/$folderId'
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/resources/$folderId'
     | '/resources'
     | '/api/forms/contact'
+    | '/api/forms/event-registration'
     | '/api/forms/membership'
     | '/api/public/drive-file/$fileId'
     | '/api/public/drive-folder/$folderId'
@@ -130,6 +142,7 @@ export interface FileRouteTypes {
     | '/resources/$folderId'
     | '/resources/'
     | '/api/forms/contact'
+    | '/api/forms/event-registration'
     | '/api/forms/membership'
     | '/api/public/drive-file/$fileId'
     | '/api/public/drive-folder/$folderId'
@@ -140,6 +153,7 @@ export interface RootRouteChildren {
   ResourcesRouteRoute: typeof ResourcesRouteRouteWithChildren
   JourneyRoute: typeof JourneyRoute
   ApiFormsContactRoute: typeof ApiFormsContactRoute
+  ApiFormsEventRegistrationRoute: typeof ApiFormsEventRegistrationRoute
   ApiFormsMembershipRoute: typeof ApiFormsMembershipRoute
   ApiPublicDriveFileFileIdRoute: typeof ApiPublicDriveFileFileIdRoute
   ApiPublicDriveFolderFolderIdRoute: typeof ApiPublicDriveFolderFolderIdRoute
@@ -189,6 +203,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiFormsMembershipRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/forms/event-registration': {
+      id: '/api/forms/event-registration'
+      path: '/api/forms/event-registration'
+      fullPath: '/api/forms/event-registration'
+      preLoaderRoute: typeof ApiFormsEventRegistrationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/forms/contact': {
       id: '/api/forms/contact'
       path: '/api/forms/contact'
@@ -232,6 +253,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesRouteRoute: ResourcesRouteRouteWithChildren,
   JourneyRoute: JourneyRoute,
   ApiFormsContactRoute: ApiFormsContactRoute,
+  ApiFormsEventRegistrationRoute: ApiFormsEventRegistrationRoute,
   ApiFormsMembershipRoute: ApiFormsMembershipRoute,
   ApiPublicDriveFileFileIdRoute: ApiPublicDriveFileFileIdRoute,
   ApiPublicDriveFolderFolderIdRoute: ApiPublicDriveFolderFolderIdRoute,

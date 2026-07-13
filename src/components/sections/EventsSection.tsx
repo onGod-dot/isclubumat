@@ -122,18 +122,47 @@ export default function EventsSection() {
     setSelected(e);
   };
 
-  const handleSubmit = (ev: React.FormEvent) => {
+  const handleSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault();
-    if (!form.name.trim() || !form.email.trim()) {
-      toast.error("Please provide your name and email.");
+    if (!selected) return;
+    if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) {
+      toast.error("Please provide your name, email, and phone number.");
       return;
     }
+
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      toast.success(`Registered for ${selected?.title}. See you there!`);
+
+    try {
+      const res = await fetch("/api/forms/event-registration", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          indexNo: form.indexNo || undefined,
+          notes: form.notes || undefined,
+          eventTitle: selected.title,
+          eventDate: selected.date,
+          eventTime: selected.time,
+          eventVenue: selected.venue,
+        }),
+      });
+
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+
+      if (!res.ok) {
+        throw new Error(data.error ?? "Something went wrong. Please try again.");
+      }
+
+      toast.success(`Registered for ${selected.title}. You'll receive an SMS confirmation shortly.`);
       setSelected(null);
-    }, 500);
+      setForm({ name: "", email: "", phone: "", indexNo: "", notes: "" });
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Could not complete registration.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -239,7 +268,7 @@ export default function EventsSection() {
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="reg-phone">Phone</Label>
-                <Input id="reg-phone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} maxLength={20} placeholder="024 000 0000" />
+                <Input id="reg-phone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} required maxLength={20} placeholder="024 000 0000" />
               </div>
             </div>
             <div className="grid gap-2">
