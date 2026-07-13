@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { fetchEmbeddedFolderHtml, parseEmbeddedFolderView } from "./drive-public";
 
 export type DriveFile = {
   id: string;
@@ -7,38 +8,29 @@ export type DriveFile = {
   size?: string;
   modifiedTime?: string;
   iconLink?: string;
+  isFolder?: boolean;
 };
 
 export const listDriveFolder = createServerFn({ method: "GET" })
-  .inputValidator((data: { folderId: string }) => {
+  .validator((data: { folderId: string }) => {
     if (!data || typeof data.folderId !== "string" || !/^[A-Za-z0-9_-]{10,}$/.test(data.folderId)) {
       throw new Error("Invalid folderId");
     }
     return data;
   })
   .handler(async ({ data }): Promise<{ files: DriveFile[]; error?: string }> => {
-    const key = process.env.GOOGLE_DRIVE_API_KEY;
-    if (!key) return { files: [], error: "Drive API key not configured" };
-
-    const params = new URLSearchParams({
-      q: `'${data.folderId}' in parents and trashed = false`,
-      fields: "files(id,name,mimeType,size,modifiedTime,iconLink)",
-      pageSize: "1000",
-      orderBy: "name",
-      key,
-    });
-
     try {
-      const res = await fetch(`https://www.googleapis.com/drive/v3/files?${params}`);
-      if (!res.ok) {
-        const body = await res.text();
-        console.error(`Drive list failed [${res.status}]: ${body}`);
-        return { files: [], error: `Drive API error (${res.status})` };
-      }
-      const json = (await res.json()) as { files?: DriveFile[] };
-      return { files: json.files ?? [] };
+      const html = await fetchEmbeddedFolderHtml(data.folderId);
+      const files = parseEmbeddedFolderView(html).map((entry) => ({
+        id: entry.id,
+        name: entry.name,
+        mimeType: entry.mimeType,
+        modifiedTime: entry.modifiedTime,
+        isFolder: entry.isFolder,
+      }));
+      return { files };
     } catch (err) {
       console.error("Drive list threw:", err);
-      return { files: [], error: "Failed to reach Google Drive" };
+      return { files: [], error: "Failed to load folder from Google Drive" };
     }
   });
