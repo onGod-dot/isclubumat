@@ -19,7 +19,11 @@ export function embeddedFolderViewUrl(folderId: string) {
   return `https://drive.google.com/embeddedfolderview?id=${encodeURIComponent(folderId)}#list`;
 }
 
-const FETCH_TIMEOUT_MS = 20_000;
+const FETCH_TIMEOUT_MS = 12_000;
+const CACHE_TTL_MS = 10 * 60 * 1000;
+
+const folderCache = new Map<string, { at: number; data: PublicFolderListing }>();
+const inflight = new Map<string, Promise<PublicFolderListing>>();
 
 async function fetchWithTimeout(url: string, init?: RequestInit): Promise<Response> {
   const controller = new AbortController();
@@ -42,7 +46,7 @@ async function fetchWithTimeout(url: string, init?: RequestInit): Promise<Respon
 
 export async function fetchEmbeddedFolderHtml(folderId: string): Promise<string> {
   let lastError: unknown;
-  for (let attempt = 0; attempt < 3; attempt++) {
+  for (let attempt = 0; attempt < 2; attempt++) {
     try {
       const res = await fetchWithTimeout(embeddedFolderViewUrl(folderId));
       if (!res.ok) {
@@ -51,8 +55,8 @@ export async function fetchEmbeddedFolderHtml(folderId: string): Promise<string>
       return await res.text();
     } catch (err) {
       lastError = err;
-      if (attempt < 2) {
-        await new Promise((r) => setTimeout(r, 600 * (attempt + 1)));
+      if (attempt === 0) {
+        await new Promise((r) => setTimeout(r, 300));
       }
     }
   }
@@ -64,18 +68,39 @@ export type PublicFolderListing = {
   error?: string;
 };
 
+async function fetchPublicFolderFiles(folderId: string): Promise<PublicFolderListing> {
+  const html = await fetchEmbeddedFolderHtml(folderId);
+  return { files: parseEmbeddedFolderView(html) };
+}
+
 export async function listPublicFolderFiles(folderId: string): Promise<PublicFolderListing> {
   if (!/^[A-Za-z0-9_-]{10,}$/.test(folderId)) {
     return { files: [], error: "Invalid folder id" };
   }
 
-  try {
-    const html = await fetchEmbeddedFolderHtml(folderId);
-    return { files: parseEmbeddedFolderView(html) };
-  } catch (err) {
-    console.error("Drive folder list failed:", err);
-    return { files: [], error: "Failed to load folder from Google Drive" };
+  const cached = folderCache.get(folderId);
+  if (cached && Date.now() - cached.at < CACHE_TTL_MS) {
+    return cached.data;
   }
+
+  const pending = inflight.get(folderId);
+  if (pending) return pending;
+
+  const request = (async () => {
+    try {
+      const data = await fetchPublicFolderFiles(folderId);
+      folderCache.set(folderId, { at: Date.now(), data });
+      return data;
+    } catch (err) {
+      console.error("Drive folder list failed:", err);
+      return { files: [], error: "Failed to load folder contents" };
+    } finally {
+      inflight.delete(folderId);
+    }
+  })();
+
+  inflight.set(folderId, request);
+  return request;
 }
 
 /** Parse the public embeddedfolderview HTML into file/folder entries. */

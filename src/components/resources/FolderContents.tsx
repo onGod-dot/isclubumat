@@ -4,33 +4,24 @@ import {
   FolderOpen,
   FileText,
   Download,
-  ExternalLink,
   ChevronRight,
   AlertCircle,
   Loader2,
 } from "lucide-react";
 import type { DriveFile } from "@/lib/drive.functions";
+import {
+  driveFolderQueryKey,
+  fetchFolderListing,
+  type FolderListing,
+} from "@/lib/drive-folder-query";
 
-const DRIVE_OPEN = (id: string) => `https://drive.google.com/drive/folders/${id}`;
-const DRIVE_FILE_VIEW = (id: string) => `https://drive.google.com/file/d/${id}/view`;
 const DRIVE_DOWNLOAD = (id: string) => `/api/public/drive-file/${id}`;
-const DRIVE_FOLDER_API = (id: string) => `/api/public/drive-folder/${id}`;
 
 export type FolderSearch = {
   title?: string;
   parent?: string;
   parentTitle?: string;
 };
-
-type FolderListing = { files: DriveFile[]; error?: string };
-
-async function fetchFolderListing(folderId: string): Promise<FolderListing> {
-  const res = await fetch(DRIVE_FOLDER_API(folderId));
-  if (!res.ok) {
-    throw new Error(`Folder request failed (${res.status})`);
-  }
-  return res.json() as Promise<FolderListing>;
-}
 
 function fileIcon(file: DriveFile) {
   if (file.isFolder) return FolderOpen;
@@ -41,13 +32,16 @@ function fileIcon(file: DriveFile) {
 type FolderContentsProps = {
   folderId: string;
   currentTitle: string;
+  initialData?: FolderListing;
 };
 
-export function FolderContents({ folderId, currentTitle }: FolderContentsProps) {
+export function FolderContents({ folderId, currentTitle, initialData }: FolderContentsProps) {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["drive-folder", folderId],
+    queryKey: driveFolderQueryKey(folderId),
     queryFn: () => fetchFolderListing(folderId),
-    staleTime: 60_000,
+    initialData,
+    staleTime: 10 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
   });
 
   const files = data?.files ?? [];
@@ -55,7 +49,7 @@ export function FolderContents({ folderId, currentTitle }: FolderContentsProps) 
   const subfolders = files.filter((f) => f.isFolder);
   const documents = files.filter((f) => !f.isFolder);
 
-  if (isLoading) {
+  if (isLoading && !data) {
     return (
       <div className="flex flex-col items-center justify-center py-24 gap-3 text-gray-400">
         <Loader2 size={32} className="animate-spin" />
@@ -69,14 +63,6 @@ export function FolderContents({ folderId, currentTitle }: FolderContentsProps) 
       <div className="flex flex-col items-center justify-center py-24 gap-3 text-gray-400 px-6 text-center">
         <AlertCircle size={32} className="text-red-400" />
         <p className="text-sm">{listError ?? "Could not load this folder."}</p>
-        <a
-          href={DRIVE_OPEN(folderId)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm font-semibold text-[color:var(--club-blue-deep)] hover:underline"
-        >
-          Open in Google Drive instead
-        </a>
       </div>
     );
   }
@@ -86,14 +72,6 @@ export function FolderContents({ folderId, currentTitle }: FolderContentsProps) 
       <div className="flex flex-col items-center justify-center py-24 gap-2 text-gray-400 px-6 text-center">
         <FolderOpen size={32} />
         <p className="text-sm">This folder is empty.</p>
-        <a
-          href={DRIVE_OPEN(folderId)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm font-semibold text-[color:var(--club-blue-deep)] hover:underline mt-2"
-        >
-          Open in Google Drive
-        </a>
       </div>
     );
   }
@@ -121,6 +99,7 @@ export function FolderContents({ folderId, currentTitle }: FolderContentsProps) 
                   parent: folderId,
                   parentTitle: currentTitle,
                 }}
+                preload="intent"
                 className="group flex items-center gap-4 rounded-2xl border border-gray-100 bg-[#F8FAFC] p-5 hover:border-[color:var(--club-blue-deep)]/30 hover:bg-white hover:shadow-[0_10px_30px_-20px_rgba(15,23,42,0.15)] hover:-translate-y-0.5 transition-all duration-200"
               >
                 <span
@@ -187,24 +166,15 @@ export function FolderContents({ folderId, currentTitle }: FolderContentsProps) 
                       )}
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 pt-1 border-t border-gray-50">
+                  <div className="pt-1 border-t border-gray-50">
                     <a
                       href={DRIVE_DOWNLOAD(file.id)}
                       download
-                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-xs font-semibold text-white transition hover:opacity-90"
+                      className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-xs font-semibold text-white transition hover:opacity-90"
                       style={{ backgroundColor: "var(--club-blue-deep)" }}
                     >
                       <Download size={14} />
                       Download
-                    </a>
-                    <a
-                      href={DRIVE_FILE_VIEW(file.id)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="Preview in Drive"
-                      className="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-gray-100 text-gray-400 hover:text-[color:var(--club-blue-deep)] hover:border-[color:var(--club-blue-deep)]/30 transition"
-                    >
-                      <ExternalLink size={15} />
                     </a>
                   </div>
                 </div>

@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft, FolderOpen } from "lucide-react";
 import { semesters } from "@/components/sections/ResourcesSection";
+import { driveFolderQueryKey, fetchFolderListing } from "@/lib/drive-folder-query";
 import logoUrl from "@/assets/is-club-logo.jpeg";
 
 export const Route = createFileRoute("/resources/")({
@@ -14,6 +16,16 @@ export const Route = createFileRoute("/resources/")({
 });
 
 function ResourcesPage() {
+  const queryClient = useQueryClient();
+
+  const prefetchFolder = (folderId: string) => {
+    void queryClient.prefetchQuery({
+      queryKey: driveFolderQueryKey(folderId),
+      queryFn: () => fetchFolderListing(folderId),
+      staleTime: 10 * 60 * 1000,
+    });
+  };
+
   return (
     <div className="min-h-screen bg-white font-[Inter]">
       <header className="sticky top-0 z-30 border-b border-gray-100 bg-white/90 backdrop-blur-md px-5 sm:px-8 py-4">
@@ -47,7 +59,7 @@ function ResourcesPage() {
             Course<br />Materials
           </h1>
           <p className="text-white/60 text-base max-w-lg leading-relaxed">
-            Every semester's slides, past questions, and notes from the IS Club Google Drive.
+            Every semester's slides, past questions, and notes from the IS Club.
             Pick a course folder to browse and download files.
           </p>
         </div>
@@ -72,6 +84,8 @@ function ResourcesPage() {
                     key={course.id}
                     to="/resources/$folderId"
                     params={{ folderId: course.id }}
+                    onMouseEnter={() => prefetchFolder(course.id)}
+                    onFocus={() => prefetchFolder(course.id)}
                     className="group flex flex-col items-center text-center rounded-xl border border-gray-100 bg-[#F8FAFC] p-5 hover:border-[color:var(--club-blue-deep)]/30 hover:bg-white hover:shadow-[0_10px_30px_-20px_rgba(15,23,42,0.2)] hover:-translate-y-0.5 transition-all duration-200"
                   >
                     <span

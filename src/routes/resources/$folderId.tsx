@@ -1,11 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ChevronRight, ExternalLink, FolderOpen } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { ResourcesPageHeader } from "@/components/resources/ResourcesPageHeader";
 import { FolderContents, type FolderSearch } from "@/components/resources/FolderContents";
 import { findCourseByFolderId } from "@/lib/resources-catalog";
 import { listPublicFolderFiles } from "@/lib/drive-public";
-
-const DRIVE_OPEN = (id: string) => `https://drive.google.com/drive/folders/${id}`;
+import { driveFolderQueryKey } from "@/lib/drive-folder-query";
 
 function toFolderListing(folderId: string) {
   return listPublicFolderFiles(folderId).then((result) => ({
@@ -27,10 +26,9 @@ export const Route = createFileRoute("/resources/$folderId")({
     parentTitle: typeof search.parentTitle === "string" ? search.parentTitle : undefined,
   }),
   loader: async ({ params, context }) => {
-    await context.queryClient.prefetchQuery({
-      queryKey: ["drive-folder", params.folderId],
-      queryFn: () => toFolderListing(params.folderId),
-    });
+    const data = await toFolderListing(params.folderId);
+    context.queryClient.setQueryData(driveFolderQueryKey(params.folderId), data);
+    return data;
   },
   head: ({ params, search }) => {
     const known = findCourseByFolderId(params.folderId);
@@ -48,6 +46,7 @@ export const Route = createFileRoute("/resources/$folderId")({
 function FolderPage() {
   const { folderId } = Route.useParams();
   const search = Route.useSearch();
+  const loaderData = Route.useLoaderData();
   const known = findCourseByFolderId(folderId);
 
   const title = search.title ?? known?.courseTitle ?? "Course Materials";
@@ -98,39 +97,30 @@ function FolderPage() {
             <span className="text-white/75">{title}</span>
           </nav>
 
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
-            <div className="max-w-2xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50 mb-3 font-mono">
-                {semesterLabel ?? "Course folder"}
-              </p>
-              <h1
-                className="font-[Archivo_Black] text-white uppercase leading-[0.95] tracking-tight"
-                style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
-              >
-                {title}
-              </h1>
-              <p className="text-white/55 text-sm sm:text-base mt-4 leading-relaxed max-w-lg">
-                Browse and download slides, past questions, and notes shared by the IS Club.
-              </p>
-            </div>
-
-            <a
-              href={DRIVE_OPEN(folderId)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 self-start rounded-xl border border-white/20 px-4 py-2.5 text-sm font-semibold text-white/80 hover:bg-white/10 hover:text-white transition"
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50 mb-3 font-mono">
+              {semesterLabel ?? "Course folder"}
+            </p>
+            <h1
+              className="font-[Archivo_Black] text-white uppercase leading-[0.95] tracking-tight"
+              style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
             >
-              <FolderOpen size={16} />
-              Open in Google Drive
-              <ExternalLink size={14} className="opacity-70" />
-            </a>
+              {title}
+            </h1>
+            <p className="text-white/55 text-sm sm:text-base mt-4 leading-relaxed max-w-lg">
+              Browse and download slides, past questions, and notes shared by the IS Club.
+            </p>
           </div>
         </div>
       </div>
 
       <main className="px-5 sm:px-8 py-12 sm:py-16">
         <div className="max-w-7xl mx-auto">
-          <FolderContents folderId={folderId} currentTitle={title} />
+          <FolderContents
+            folderId={folderId}
+            currentTitle={title}
+            initialData={loaderData}
+          />
         </div>
       </main>
     </div>
