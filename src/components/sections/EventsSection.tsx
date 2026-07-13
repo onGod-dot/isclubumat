@@ -175,7 +175,7 @@ export default function EventsSection() {
             Upcoming events &amp; activities.
           </h2>
           {/* Slider controls */}
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="hidden sm:flex items-center gap-2 shrink-0">
             <button
               onClick={() => scroll("left")}
               className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-gray-200 bg-white text-gray-600 hover:border-[color:var(--club-blue-deep)] hover:text-[color:var(--club-blue-deep)] transition"
