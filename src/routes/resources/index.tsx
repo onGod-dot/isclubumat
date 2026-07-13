@@ -3,7 +3,7 @@ import { ArrowLeft, FolderOpen } from "lucide-react";
 import { semesters } from "@/components/sections/ResourcesSection";
 import logoUrl from "@/assets/is-club-logo.jpeg";
 
-export const Route = createFileRoute("/resources")({
+export const Route = createFileRoute("/resources/")({
   head: () => ({
     meta: [
       { title: "Learning Resources IS Club UMAT" },

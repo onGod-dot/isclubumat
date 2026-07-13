@@ -1,15 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
 import {
   FolderOpen,
   FileText,
   Download,
   ExternalLink,
   ChevronRight,
-  Loader2,
   AlertCircle,
 } from "lucide-react";
-import { listDriveFolder, type DriveFile } from "@/lib/drive.functions";
+import type { DriveFile } from "@/lib/drive.functions";
 
 const DRIVE_OPEN = (id: string) => `https://drive.google.com/drive/folders/${id}`;
 const DRIVE_FILE_VIEW = (id: string) => `https://drive.google.com/file/d/${id}/view`;
@@ -30,33 +28,19 @@ function fileIcon(file: DriveFile) {
 type FolderContentsProps = {
   folderId: string;
   currentTitle: string;
+  files: DriveFile[];
+  error?: string;
 };
 
-export function FolderContents({ folderId, currentTitle }: FolderContentsProps) {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["drive-folder", folderId],
-    queryFn: () => listDriveFolder({ data: { folderId } }),
-  });
-
-  const files = data?.files ?? [];
-  const listError = data?.error;
+export function FolderContents({ folderId, currentTitle, files, error }: FolderContentsProps) {
   const subfolders = files.filter((f) => f.isFolder);
   const documents = files.filter((f) => !f.isFolder);
 
-  if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center py-24 gap-3 text-gray-400">
-        <Loader2 size={32} className="animate-spin" />
-        <p className="text-sm">Loading files…</p>
-      </div>
-    );
-  }
-
-  if (isError || listError) {
+  if (error) {
     return (
       <div className="flex flex-col items-center justify-center py-24 gap-3 text-gray-400 px-6 text-center">
         <AlertCircle size={32} className="text-red-400" />
-        <p className="text-sm">{listError ?? "Could not load this folder."}</p>
+        <p className="text-sm">{error}</p>
         <a
           href={DRIVE_OPEN(folderId)}
           target="_blank"
@@ -86,7 +70,9 @@ export function FolderContents({ folderId, currentTitle }: FolderContentsProps) 
             <h2 className="font-[Archivo_Black] text-sm uppercase tracking-tight text-gray-500">
               Folders
             </h2>
-            <span className="text-xs text-gray-400">{subfolders.length} folder{subfolders.length === 1 ? "" : "s"}</span>
+            <span className="text-xs text-gray-400">
+              {subfolders.length} folder{subfolders.length === 1 ? "" : "s"}
+            </span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {subfolders.map((folder) => (
@@ -134,7 +120,9 @@ export function FolderContents({ folderId, currentTitle }: FolderContentsProps) 
             <h2 className="font-[Archivo_Black] text-sm uppercase tracking-tight text-gray-500">
               Files
             </h2>
-            <span className="text-xs text-gray-400">{documents.length} file{documents.length === 1 ? "" : "s"}</span>
+            <span className="text-xs text-gray-400">
+              {documents.length} file{documents.length === 1 ? "" : "s"}
+            </span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {documents.map((file) => {
@@ -142,7 +130,7 @@ export function FolderContents({ folderId, currentTitle }: FolderContentsProps) 
               return (
                 <div
                   key={file.id}
-                  className="group flex flex-col gap-4 rounded-2xl border border-gray-100 bg-white p-5 hover:border-[color:var(--club-blue-deep)]/20 hover:shadow-[0_10px_30px_-20px_rgba(15,23,42,0.12)] transition-all duration-200"
+                  className="group flex flex-col gap-4 rounded-2xl border border-gray-100 bg-white p-5 hover:border-[color:var(--club-blue-deep)]/20 hover:shadow-[0_10px_30px_-20px_rgba(15,23,42,0.15)] transition-all duration-200"
                 >
                   <div className="flex items-start gap-4">
                     <span

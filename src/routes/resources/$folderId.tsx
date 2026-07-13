@@ -3,8 +3,29 @@ import { ChevronRight, ExternalLink, FolderOpen } from "lucide-react";
 import { ResourcesPageHeader } from "@/components/resources/ResourcesPageHeader";
 import { FolderContents, type FolderSearch } from "@/components/resources/FolderContents";
 import { findCourseByFolderId } from "@/lib/resources-catalog";
+import { fetchEmbeddedFolderHtml, parseEmbeddedFolderView } from "@/lib/drive-public";
+import type { DriveFile } from "@/lib/drive.functions";
 
 const DRIVE_OPEN = (id: string) => `https://drive.google.com/drive/folders/${id}`;
+
+type FolderLoaderData = { files: DriveFile[]; error?: string };
+
+async function loadFolderFiles(folderId: string): Promise<FolderLoaderData> {
+  try {
+    const html = await fetchEmbeddedFolderHtml(folderId);
+    const files = parseEmbeddedFolderView(html).map((entry) => ({
+      id: entry.id,
+      name: entry.name,
+      mimeType: entry.mimeType,
+      modifiedTime: entry.modifiedTime,
+      isFolder: entry.isFolder,
+    }));
+    return { files };
+  } catch (err) {
+    console.error("Drive folder loader failed:", err);
+    return { files: [], error: "Failed to load folder from Google Drive" };
+  }
+}
 
 export const Route = createFileRoute("/resources/$folderId")({
   validateSearch: (search: Record<string, unknown>): FolderSearch => ({
@@ -12,9 +33,10 @@ export const Route = createFileRoute("/resources/$folderId")({
     parent: typeof search.parent === "string" ? search.parent : undefined,
     parentTitle: typeof search.parentTitle === "string" ? search.parentTitle : undefined,
   }),
+  loader: ({ params }) => loadFolderFiles(params.folderId),
   head: ({ params, search }) => {
     const known = findCourseByFolderId(params.folderId);
-    const title = search.title ?? known?.courseTitle ?? "Course Materials";
+    const title = search?.title ?? known?.courseTitle ?? "Course Materials";
     return {
       meta: [
         { title: `${title} — Learning Resources IS Club UMAT` },
@@ -28,6 +50,7 @@ export const Route = createFileRoute("/resources/$folderId")({
 function FolderPage() {
   const { folderId } = Route.useParams();
   const search = Route.useSearch();
+  const loaderData = Route.useLoaderData();
   const known = findCourseByFolderId(folderId);
 
   const title = search.title ?? known?.courseTitle ?? "Course Materials";
@@ -110,7 +133,12 @@ function FolderPage() {
 
       <main className="px-5 sm:px-8 py-12 sm:py-16">
         <div className="max-w-7xl mx-auto">
-          <FolderContents folderId={folderId} currentTitle={title} />
+          <FolderContents
+            folderId={folderId}
+            currentTitle={title}
+            files={loaderData.files}
+            error={loaderData.error}
+          />
         </div>
       </main>
     </div>
