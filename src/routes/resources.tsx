@@ -1,7 +1,18 @@
 import { useState, useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, FolderOpen, X, ExternalLink, Maximize2 } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import {
+  ArrowLeft,
+  FolderOpen,
+  X,
+  Download,
+  Loader2,
+  FileText,
+  File as FileIcon,
+  AlertCircle,
+} from "lucide-react";
 import { semesters } from "@/components/sections/ResourcesSection";
+import { listDriveFolder, type DriveFile } from "@/lib/drive.functions";
 import logoUrl from "@/assets/is-club-logo.jpeg";
 
 export const Route = createFileRoute("/resources")({
@@ -14,18 +25,41 @@ export const Route = createFileRoute("/resources")({
   component: ResourcesPage,
 });
 
-const DRIVE_EMBED = (id: string) =>
-  `https://drive.google.com/embeddedfolderview?id=${id}#list`;
-
-const DRIVE_OPEN = (id: string) =>
-  `https://drive.google.com/drive/folders/${id}`;
-
 interface ActiveFolder {
   id: string;
   title: string;
 }
 
-function DriveModal({ folder, onClose }: { folder: ActiveFolder; onClose: () => void }) {
+function formatBytes(size?: string) {
+  if (!size) return "";
+  const n = Number(size);
+  if (!Number.isFinite(n) || n <= 0) return "";
+  const units = ["B", "KB", "MB", "GB"];
+  let i = 0;
+  let v = n;
+  while (v >= 1024 && i < units.length - 1) {
+    v /= 1024;
+    i++;
+  }
+  return `${v.toFixed(v >= 10 || i === 0 ? 0 : 1)} ${units[i]}`;
+}
+
+function fileTypeLabel(mime: string) {
+  if (mime === "application/vnd.google-apps.folder") return "Folder";
+  if (mime === "application/vnd.google-apps.document") return "Google Doc";
+  if (mime === "application/vnd.google-apps.spreadsheet") return "Google Sheet";
+  if (mime === "application/vnd.google-apps.presentation") return "Google Slides";
+  if (mime === "application/pdf") return "PDF";
+  if (mime.startsWith("image/")) return mime.replace("image/", "").toUpperCase();
+  if (mime.startsWith("video/")) return mime.replace("video/", "").toUpperCase();
+  if (mime.includes("word")) return "Word";
+  if (mime.includes("sheet") || mime.includes("excel")) return "Excel";
+  if (mime.includes("presentation") || mime.includes("powerpoint")) return "PowerPoint";
+  if (mime.includes("zip")) return "ZIP";
+  return "File";
+}
+
+function FolderModal({ folder, onClose }: { folder: ActiveFolder; onClose: () => void }) {
   // Close on Escape
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
@@ -37,6 +71,17 @@ function DriveModal({ folder, onClose }: { folder: ActiveFolder; onClose: () => 
     };
   }, [onClose]);
 
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["drive-folder", folder.id],
+    queryFn: () => listDriveFolder({ data: { folderId: folder.id } }),
+    staleTime: 60_000,
+  });
+
+  const files: DriveFile[] = data?.files ?? [];
+  const nonFolderFiles = files.filter(
+    (f) => f.mimeType !== "application/vnd.google-apps.folder",
+  );
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
@@ -44,7 +89,7 @@ function DriveModal({ folder, onClose }: { folder: ActiveFolder; onClose: () => 
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-5xl flex flex-col rounded-2xl overflow-hidden shadow-2xl bg-white"
+        className="relative w-full max-w-3xl flex flex-col rounded-2xl overflow-hidden shadow-2xl bg-white"
         style={{ height: "min(85vh, 720px)" }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -60,16 +105,6 @@ function DriveModal({ folder, onClose }: { folder: ActiveFolder; onClose: () => 
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <a
-              href={DRIVE_OPEN(folder.id)}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Open in Google Drive"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-white/70 hover:text-white transition px-3 py-1.5 rounded-lg hover:bg-white/10"
-            >
-              <ExternalLink size={13} />
-              Open in Drive
-            </a>
             <button
               onClick={onClose}
               className="inline-flex items-center justify-center w-8 h-8 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition"
@@ -80,31 +115,85 @@ function DriveModal({ folder, onClose }: { folder: ActiveFolder; onClose: () => 
           </div>
         </div>
 
-        {/* Drive embed */}
-        <div className="flex-1 overflow-hidden">
-          <iframe
-            src={DRIVE_EMBED(folder.id)}
-            title={folder.title}
-            className="w-full h-full border-0"
-            allow="autoplay"
-            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-downloads"
-          />
+        {/* File list */}
+        <div className="flex-1 overflow-y-auto bg-white">
+          {isLoading && (
+            <div className="flex flex-col items-center justify-center h-full text-gray-400 gap-3">
+              <Loader2 className="animate-spin" size={22} />
+              <p className="text-sm">Loading files…</p>
+            </div>
+          )}
+          {isError && (
+            <div className="flex flex-col items-center justify-center h-full text-center px-6 gap-2 text-red-600">
+              <AlertCircle size={22} />
+              <p className="text-sm font-semibold">Couldn't load files</p>
+              <p className="text-xs text-gray-500">{(error as Error)?.message ?? "Unknown error"}</p>
+            </div>
+          )}
+          {!isLoading && !isError && data?.error && (
+            <div className="flex flex-col items-center justify-center h-full text-center px-6 gap-2 text-amber-700">
+              <AlertCircle size={22} />
+              <p className="text-sm font-semibold">{data.error}</p>
+            </div>
+          )}
+          {!isLoading && !isError && !data?.error && nonFolderFiles.length === 0 && (
+            <div className="flex items-center justify-center h-full text-sm text-gray-400">
+              This folder is empty.
+            </div>
+          )}
+          {nonFolderFiles.length > 0 && (
+            <ul className="divide-y divide-gray-100">
+              {nonFolderFiles.map((f) => {
+                const isDoc =
+                  f.mimeType === "application/pdf" ||
+                  f.mimeType.includes("word") ||
+                  f.mimeType.includes("document") ||
+                  f.mimeType.startsWith("text/");
+                return (
+                  <li
+                    key={f.id}
+                    className="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition"
+                  >
+                    <span
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-lg flex-shrink-0"
+                      style={{
+                        backgroundColor:
+                          "color-mix(in oklab, var(--club-blue-deep) 8%, transparent)",
+                        color: "var(--club-blue-deep)",
+                      }}
+                    >
+                      {isDoc ? <FileText size={16} /> : <FileIcon size={16} />}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-800 truncate">{f.name}</p>
+                      <p className="text-[11px] text-gray-400">
+                        {fileTypeLabel(f.mimeType)}
+                        {formatBytes(f.size) && ` · ${formatBytes(f.size)}`}
+                      </p>
+                    </div>
+                    <a
+                      href={`/api/public/drive-file/${f.id}`}
+                      download={f.name}
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg text-white transition hover:opacity-90"
+                      style={{ backgroundColor: "var(--club-blue-deep)" }}
+                    >
+                      <Download size={13} />
+                      Download
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
 
         {/* Bottom bar */}
         <div className="flex items-center justify-between px-5 py-2.5 border-t border-gray-100 bg-gray-50 flex-shrink-0">
           <p className="text-xs text-gray-400">
-            Click any file to preview · Use the Drive toolbar to download
+            {nonFolderFiles.length > 0
+              ? `${nonFolderFiles.length} file${nonFolderFiles.length === 1 ? "" : "s"} · Downloads stream directly`
+              : "Downloads stream directly from our servers"}
           </p>
-          <a
-            href={DRIVE_OPEN(folder.id)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-xs font-semibold text-[color:var(--club-blue-deep)] hover:underline"
-          >
-            <Maximize2 size={12} />
-            Full screen
-          </a>
         </div>
       </div>
     </div>
@@ -205,9 +294,9 @@ function ResourcesPage() {
         </div>
       </main>
 
-      {/* Drive embed modal */}
+      {/* Folder file list modal */}
       {activeFolder && (
-        <DriveModal folder={activeFolder} onClose={() => setActiveFolder(null)} />
+        <FolderModal folder={activeFolder} onClose={() => setActiveFolder(null)} />
       )}
 
     </div>
