@@ -128,7 +128,8 @@ export function SemesterCardPreview({ sem }: { sem: typeof semesters[0] }) {
             className={i >= 5 ? "hidden sm:list-item" : ""}
           >
             <Link
-              to="/resources"
+              to="/resources/$folderId"
+              params={{ folderId: c.id }}
               className="flex items-center gap-2 rounded-lg border border-gray-100 bg-white px-3 py-2 text-sm text-gray-700 hover:border-[color:var(--club-blue-deep)]/40 hover:text-[color:var(--club-blue-deep)] transition group/link"
             >
               <FolderOpen size={14} className="flex-shrink-0" style={{ color: "var(--club-lime)" }} />
