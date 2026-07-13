@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import {
   FolderOpen,
   FileText,
@@ -6,18 +7,30 @@ import {
   ExternalLink,
   ChevronRight,
   AlertCircle,
+  Loader2,
 } from "lucide-react";
 import type { DriveFile } from "@/lib/drive.functions";
 
 const DRIVE_OPEN = (id: string) => `https://drive.google.com/drive/folders/${id}`;
 const DRIVE_FILE_VIEW = (id: string) => `https://drive.google.com/file/d/${id}/view`;
 const DRIVE_DOWNLOAD = (id: string) => `/api/public/drive-file/${id}`;
+const DRIVE_FOLDER_API = (id: string) => `/api/public/drive-folder/${id}`;
 
 export type FolderSearch = {
   title?: string;
   parent?: string;
   parentTitle?: string;
 };
+
+type FolderListing = { files: DriveFile[]; error?: string };
+
+async function fetchFolderListing(folderId: string): Promise<FolderListing> {
+  const res = await fetch(DRIVE_FOLDER_API(folderId));
+  if (!res.ok) {
+    throw new Error(`Folder request failed (${res.status})`);
+  }
+  return res.json() as Promise<FolderListing>;
+}
 
 function fileIcon(file: DriveFile) {
   if (file.isFolder) return FolderOpen;
@@ -28,19 +41,34 @@ function fileIcon(file: DriveFile) {
 type FolderContentsProps = {
   folderId: string;
   currentTitle: string;
-  files: DriveFile[];
-  error?: string;
 };
 
-export function FolderContents({ folderId, currentTitle, files, error }: FolderContentsProps) {
+export function FolderContents({ folderId, currentTitle }: FolderContentsProps) {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["drive-folder", folderId],
+    queryFn: () => fetchFolderListing(folderId),
+    staleTime: 60_000,
+  });
+
+  const files = data?.files ?? [];
+  const listError = data?.error;
   const subfolders = files.filter((f) => f.isFolder);
   const documents = files.filter((f) => !f.isFolder);
 
-  if (error) {
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center py-24 gap-3 text-gray-400">
+        <Loader2 size={32} className="animate-spin" />
+        <p className="text-sm">Loading files…</p>
+      </div>
+    );
+  }
+
+  if (isError || listError) {
     return (
       <div className="flex flex-col items-center justify-center py-24 gap-3 text-gray-400 px-6 text-center">
         <AlertCircle size={32} className="text-red-400" />
-        <p className="text-sm">{error}</p>
+        <p className="text-sm">{listError ?? "Could not load this folder."}</p>
         <a
           href={DRIVE_OPEN(folderId)}
           target="_blank"
@@ -58,6 +86,14 @@ export function FolderContents({ folderId, currentTitle, files, error }: FolderC
       <div className="flex flex-col items-center justify-center py-24 gap-2 text-gray-400 px-6 text-center">
         <FolderOpen size={32} />
         <p className="text-sm">This folder is empty.</p>
+        <a
+          href={DRIVE_OPEN(folderId)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm font-semibold text-[color:var(--club-blue-deep)] hover:underline mt-2"
+        >
+          Open in Google Drive
+        </a>
       </div>
     );
   }

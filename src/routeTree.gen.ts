@@ -14,6 +14,7 @@ import { Route as ResourcesRouteRouteImport } from './routes/resources/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ResourcesIndexRouteImport } from './routes/resources/index'
 import { Route as ResourcesFolderIdRouteImport } from './routes/resources/$folderId'
+import { Route as ApiPublicDriveFolderFolderIdRouteImport } from './routes/api/public/drive-folder.$folderId'
 import { Route as ApiPublicDriveFileFileIdRouteImport } from './routes/api/public/drive-file.$fileId'
 
 const JourneyRoute = JourneyRouteImport.update({
@@ -41,6 +42,12 @@ const ResourcesFolderIdRoute = ResourcesFolderIdRouteImport.update({
   path: '/$folderId',
   getParentRoute: () => ResourcesRouteRoute,
 } as any)
+const ApiPublicDriveFolderFolderIdRoute =
+  ApiPublicDriveFolderFolderIdRouteImport.update({
+    id: '/api/public/drive-folder/$folderId',
+    path: '/api/public/drive-folder/$folderId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicDriveFileFileIdRoute =
   ApiPublicDriveFileFileIdRouteImport.update({
     id: '/api/public/drive-file/$fileId',
@@ -55,6 +62,7 @@ export interface FileRoutesByFullPath {
   '/resources/$folderId': typeof ResourcesFolderIdRoute
   '/resources/': typeof ResourcesIndexRoute
   '/api/public/drive-file/$fileId': typeof ApiPublicDriveFileFileIdRoute
+  '/api/public/drive-folder/$folderId': typeof ApiPublicDriveFolderFolderIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +70,7 @@ export interface FileRoutesByTo {
   '/resources/$folderId': typeof ResourcesFolderIdRoute
   '/resources': typeof ResourcesIndexRoute
   '/api/public/drive-file/$fileId': typeof ApiPublicDriveFileFileIdRoute
+  '/api/public/drive-folder/$folderId': typeof ApiPublicDriveFolderFolderIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +80,7 @@ export interface FileRoutesById {
   '/resources/$folderId': typeof ResourcesFolderIdRoute
   '/resources/': typeof ResourcesIndexRoute
   '/api/public/drive-file/$fileId': typeof ApiPublicDriveFileFileIdRoute
+  '/api/public/drive-folder/$folderId': typeof ApiPublicDriveFolderFolderIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +91,7 @@ export interface FileRouteTypes {
     | '/resources/$folderId'
     | '/resources/'
     | '/api/public/drive-file/$fileId'
+    | '/api/public/drive-folder/$folderId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -88,6 +99,7 @@ export interface FileRouteTypes {
     | '/resources/$folderId'
     | '/resources'
     | '/api/public/drive-file/$fileId'
+    | '/api/public/drive-folder/$folderId'
   id:
     | '__root__'
     | '/'
@@ -96,6 +108,7 @@ export interface FileRouteTypes {
     | '/resources/$folderId'
     | '/resources/'
     | '/api/public/drive-file/$fileId'
+    | '/api/public/drive-folder/$folderId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -103,6 +116,7 @@ export interface RootRouteChildren {
   ResourcesRouteRoute: typeof ResourcesRouteRouteWithChildren
   JourneyRoute: typeof JourneyRoute
   ApiPublicDriveFileFileIdRoute: typeof ApiPublicDriveFileFileIdRoute
+  ApiPublicDriveFolderFolderIdRoute: typeof ApiPublicDriveFolderFolderIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -142,6 +156,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesFolderIdRouteImport
       parentRoute: typeof ResourcesRouteRoute
     }
+    '/api/public/drive-folder/$folderId': {
+      id: '/api/public/drive-folder/$folderId'
+      path: '/api/public/drive-folder/$folderId'
+      fullPath: '/api/public/drive-folder/$folderId'
+      preLoaderRoute: typeof ApiPublicDriveFolderFolderIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/drive-file/$fileId': {
       id: '/api/public/drive-file/$fileId'
       path: '/api/public/drive-file/$fileId'
@@ -171,6 +192,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesRouteRoute: ResourcesRouteRouteWithChildren,
   JourneyRoute: JourneyRoute,
   ApiPublicDriveFileFileIdRoute: ApiPublicDriveFileFileIdRoute,
+  ApiPublicDriveFolderFolderIdRoute: ApiPublicDriveFolderFolderIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

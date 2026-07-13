@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { fetchEmbeddedFolderHtml, parseEmbeddedFolderView } from "./drive-public";
+import { listPublicFolderFiles } from "./drive-public";
 
 export type DriveFile = {
   id: string;
@@ -19,18 +19,15 @@ export const listDriveFolder = createServerFn({ method: "GET" })
     return data;
   })
   .handler(async ({ data }): Promise<{ files: DriveFile[]; error?: string }> => {
-    try {
-      const html = await fetchEmbeddedFolderHtml(data.folderId);
-      const files = parseEmbeddedFolderView(html).map((entry) => ({
+    const result = await listPublicFolderFiles(data.folderId);
+    return {
+      files: result.files.map((entry) => ({
         id: entry.id,
         name: entry.name,
         mimeType: entry.mimeType,
         modifiedTime: entry.modifiedTime,
         isFolder: entry.isFolder,
-      }));
-      return { files };
-    } catch (err) {
-      console.error("Drive list threw:", err);
-      return { files: [], error: "Failed to load folder from Google Drive" };
-    }
+      })),
+      error: result.error,
+    };
   });

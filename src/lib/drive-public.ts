@@ -19,14 +19,63 @@ export function embeddedFolderViewUrl(folderId: string) {
   return `https://drive.google.com/embeddedfolderview?id=${encodeURIComponent(folderId)}#list`;
 }
 
-export async function fetchEmbeddedFolderHtml(folderId: string): Promise<string> {
-  const res = await fetch(embeddedFolderViewUrl(folderId), {
-    headers: { "User-Agent": DRIVE_USER_AGENT },
-  });
-  if (!res.ok) {
-    throw new Error(`Drive folder fetch failed (${res.status})`);
+const FETCH_TIMEOUT_MS = 20_000;
+
+async function fetchWithTimeout(url: string, init?: RequestInit): Promise<Response> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+  try {
+    return await fetch(url, {
+      ...init,
+      signal: controller.signal,
+      headers: {
+        "User-Agent": DRIVE_USER_AGENT,
+        Accept: "text/html,application/xhtml+xml",
+        "Accept-Language": "en-US,en;q=0.9",
+        ...init?.headers,
+      },
+    });
+  } finally {
+    clearTimeout(timeout);
   }
-  return res.text();
+}
+
+export async function fetchEmbeddedFolderHtml(folderId: string): Promise<string> {
+  let lastError: unknown;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const res = await fetchWithTimeout(embeddedFolderViewUrl(folderId));
+      if (!res.ok) {
+        throw new Error(`Drive folder fetch failed (${res.status})`);
+      }
+      return await res.text();
+    } catch (err) {
+      lastError = err;
+      if (attempt < 2) {
+        await new Promise((r) => setTimeout(r, 600 * (attempt + 1)));
+      }
+    }
+  }
+  throw lastError;
+}
+
+export type PublicFolderListing = {
+  files: ParsedDriveEntry[];
+  error?: string;
+};
+
+export async function listPublicFolderFiles(folderId: string): Promise<PublicFolderListing> {
+  if (!/^[A-Za-z0-9_-]{10,}$/.test(folderId)) {
+    return { files: [], error: "Invalid folder id" };
+  }
+
+  try {
+    const html = await fetchEmbeddedFolderHtml(folderId);
+    return { files: parseEmbeddedFolderView(html) };
+  } catch (err) {
+    console.error("Drive folder list failed:", err);
+    return { files: [], error: "Failed to load folder from Google Drive" };
+  }
 }
 
 /** Parse the public embeddedfolderview HTML into file/folder entries. */
