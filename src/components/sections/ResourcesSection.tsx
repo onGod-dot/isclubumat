@@ -89,6 +89,7 @@ export const semesters = [
       { title: "Human–Computer Interaction", id: "1qBz-MoofsMfFBtPkCk_YyTgoTDnT1goo" },
       { title: "Info. & Cybersecurity", id: "156IfC8IfYepj6NjwtlffpOREwJMKvOV-" },
       { title: "Research Ethics", id: "13RzhdrMxgTVOy7rr3d-wcATRP8ZMyssA" },
+      { title: "Simulation Modelling", id: "1U6OGLaXuyT5Sa5mknQBikPsz6Biips55" },
       { title: "Digital Marketing & E-commerce Glossary", id: "1B1XrM6IpQJidLo_PT6nfvtaPPiUnn8Jfbgo7p9acQq8" },
     ],
   },
