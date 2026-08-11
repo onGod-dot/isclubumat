@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 import {
   FolderOpen,
   FileText,
@@ -35,29 +36,35 @@ type FolderContentsProps = {
 };
 
 export function FolderContents({ folderId, currentTitle, initialData }: FolderContentsProps) {
+  const queryClient = useQueryClient();
+
   const { data, isLoading, isError } = useQuery({
     queryKey: driveFolderQueryKey(folderId),
     queryFn: () => fetchFolderListing(folderId),
     initialData,
     staleTime: 10 * 60 * 1000,
     gcTime: 30 * 60 * 1000,
+    retry: 3,
+    retryDelay: 1500,
   });
 
+  const hasFailed = isError || !!data?.error;
+
+  // Auto-retry: if the query errored or returned an error flag,
+  // wait 2 s then invalidate + refetch so the loader shows fresh data.
+  useEffect(() => {
+    if (!hasFailed) return;
+    const timer = setTimeout(() => {
+      void queryClient.invalidateQueries({ queryKey: driveFolderQueryKey(folderId) });
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [hasFailed, folderId, queryClient]);
+
   const files = data?.files ?? [];
-  const listError = data?.error;
   const subfolders = files.filter((f) => f.isFolder);
   const documents = files.filter((f) => !f.isFolder);
 
-  if (isLoading && !data) {
-    return (
-      <div className="flex flex-col items-center justify-center py-24 gap-3 text-gray-400">
-        <Loader2 size={32} className="animate-spin" />
-        <p className="text-sm">Loading files…</p>
-      </div>
-    );
-  }
-
-  if (isError || listError) {
+  if ((isLoading && !data) || hasFailed) {
     return (
       <div className="flex flex-col items-center justify-center py-24 gap-3 text-gray-400">
         <Loader2 size={32} className="animate-spin" />
