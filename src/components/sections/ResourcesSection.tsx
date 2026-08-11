@@ -77,7 +77,7 @@ export const semesters = [
     name: "L300 2nd Semester",
     icon: GraduationCap,
     courses: [
-      { title: "Business Entrepreneurship", id: "1A6_4rZAxvtUh0yNV147NEbU5UPd56TiG" },
+      { title: "Business Entrepreneurship", id: "1CToL8bjWP9uya48dX9mSmcHGrnugX5wO" },
       { title: "Data Science", id: "1coNFDq9lqcCunpDDI6zAPyMgNyxwy5v-" },
       { title: "Human–Computer Interaction", id: "1qBz-MoofsMfFBtPkCk_YyTgoTDnT1goo" },
       { title: "Info. & Cybersecurity", id: "156IfC8IfYepj6NjwtlffpOREwJMKvOV-" },
