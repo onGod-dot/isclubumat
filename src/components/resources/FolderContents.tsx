@@ -5,7 +5,6 @@ import {
   FileText,
   Download,
   ChevronRight,
-  AlertCircle,
   Loader2,
 } from "lucide-react";
 import type { DriveFile } from "@/lib/drive.functions";
@@ -60,9 +59,9 @@ export function FolderContents({ folderId, currentTitle, initialData }: FolderCo
 
   if (isError || listError) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 gap-3 text-gray-400 px-6 text-center">
-        <AlertCircle size={32} className="text-red-400" />
-        <p className="text-sm">{listError ?? "Could not load this folder."}</p>
+      <div className="flex flex-col items-center justify-center py-24 gap-3 text-gray-400">
+        <Loader2 size={32} className="animate-spin" />
+        <p className="text-sm">Loading files…</p>
       </div>
     );
   }

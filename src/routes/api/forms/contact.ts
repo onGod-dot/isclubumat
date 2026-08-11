@@ -3,6 +3,7 @@ import { z } from "zod";
 import { getAdminRecipients, sendSms } from "@/lib/mnotify";
 import { normalizeGhanaPhone } from "@/lib/phone";
 import { contactAdminAlertMessage, contactConfirmationMessage } from "@/lib/sms-messages";
+import { logFormSubmission } from "@/lib/google-sheets";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -57,6 +58,8 @@ export const Route = createFileRoute("/api/forms/contact")({
             { status: 502 },
           );
         }
+
+        logFormSubmission("contact", payload);
 
         return Response.json({ ok: true });
       },

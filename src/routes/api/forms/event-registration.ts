@@ -6,6 +6,7 @@ import {
   eventRegistrationAdminAlertMessage,
   eventRegistrationConfirmationMessage,
 } from "@/lib/sms-messages";
+import { logFormSubmission } from "@/lib/google-sheets";
 
 const eventRegistrationSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -64,6 +65,8 @@ export const Route = createFileRoute("/api/forms/event-registration")({
             { status: 502 },
           );
         }
+
+        logFormSubmission("event", payload);
 
         return Response.json({ ok: true });
       },

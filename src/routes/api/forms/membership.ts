@@ -3,6 +3,7 @@ import { z } from "zod";
 import { getAdminRecipients, sendSms } from "@/lib/mnotify";
 import { normalizeGhanaPhone } from "@/lib/phone";
 import { membershipAdminAlertMessage, membershipConfirmationMessage } from "@/lib/sms-messages";
+import { logFormSubmission } from "@/lib/google-sheets";
 
 const membershipSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -60,6 +61,11 @@ export const Route = createFileRoute("/api/forms/membership")({
             { status: 502 },
           );
         }
+
+        logFormSubmission("membership", {
+          ...payload,
+          interests: payload.interests,
+        });
 
         return Response.json({ ok: true });
       },
